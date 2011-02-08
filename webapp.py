@@ -29,11 +29,13 @@ class GameService(object):
 
     def create_game(self, word):
         channel = hashlib.md5(str(time.time())).hexdigest()
+        word_state = ["_" for i in range(len(word))]
         game = {
             "word": word,
             "channel": channel,
-            "status": "running",
-            "guesses": [],
+            "status": "started",
+            "word_state": word_state,
+            "failed_guesses": [],
             "participants": 1
         }
         self.db.games.insert(game)
@@ -41,15 +43,21 @@ class GameService(object):
 
     def guess(self, channel, letter):
         game = self.db.games.find_one({"channel" : channel})
-        current_guesses = len(game["guesses"])
-        if letter in game["guesses"]:
-            game["status"] = "duplicate":
-        else:
-            if current_guesses + 1 == self.MAX_TRIES:
+        if game["status"] != "over":
+            current_fails = len(game["failed_guesses"])
+            if letter in game["failed_guesses"] or letter in game["word_state"]: #Already have that
+                game["status"] = "duplicate"
+            elif letter in word:
+               [game["word_state"].pop(i) and game["word_state"].insert(i, letter)
+                for i in range(len(game["word"])) if "apa"[i] == letter]
+                game["status"] = "correct"
+            elif current_guesses + 1 == self.MAX_TRIES:
                 game["status"] = "over"
             else:
-                game["guesses"].append(letter)
-        return game
+                game["failed_guesses"].append(letter)
+                game["status"] = "failed"
+            self.db.insert(game)
+        return game #TODO: fix
 
 if __name__ == "__main__":
     app.run(debug=True)

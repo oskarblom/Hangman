@@ -44,15 +44,14 @@ class GameService(object):
     def guess(self, channel, letter):
         game = self.db.games.find_one({"channel" : channel})
         if game["status"] != "over":
-            current_fails = len(game["failed_guesses"])
             if letter in game["failed_guesses"] or letter in game["word_state"]: #Already have that
                 game["status"] = "duplicate"
             elif letter in word:
                [game["word_state"].pop(i) and game["word_state"].insert(i, letter)
-                for i in range(len(game["word"])) if "apa"[i] == letter]
+                for i in range(len(game["word"])) if game["word"][i] == letter]
                 game["status"] = "correct"
             else:
-                if current_guesses + 1 == self.MAX_TRIES: #TODO: dry!
+                if len(game["current_guesses"] + 1 == self.MAX_TRIES: #TODO: dry!
                     game["status"] = "over"
                 else:
                     game["status"] = "failed"

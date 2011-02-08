@@ -29,7 +29,7 @@ class GameService(object):
 
     def create_game(self, word):
         channel = hashlib.md5(str(time.time())).hexdigest()
-        word_state = ["_" for i in range(len(word))]
+        word_state = ["_"] * len(word)
         game = {
             "word": word,
             "channel": channel,

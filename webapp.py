@@ -51,7 +51,7 @@ class GameService(object):
                 for i in range(len(game["word"])) if game["word"][i] == letter]
                 game["status"] = "correct"
             else:
-                if len(game["current_guesses"] + 1 == self.MAX_TRIES: #TODO: dry!
+                if len(game["current_guesses"] + 1 == self.MAX_TRIES:
                     game["status"] = "over"
                 else:
                     game["status"] = "failed"

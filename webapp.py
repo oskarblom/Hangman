@@ -39,7 +39,7 @@ class GameService(object):
             "participants": 1
         }
         self.db.games.insert(game)
-        return channel, game
+        return game
 
     def guess(self, channel, letter):
         game = self.db.games.find_one({"channel" : channel})
@@ -51,13 +51,16 @@ class GameService(object):
                [game["word_state"].pop(i) and game["word_state"].insert(i, letter)
                 for i in range(len(game["word"])) if "apa"[i] == letter]
                 game["status"] = "correct"
-            elif current_guesses + 1 == self.MAX_TRIES:
-                game["status"] = "over"
             else:
+                if current_guesses + 1 == self.MAX_TRIES: #TODO: dry!
+                    game["status"] = "over"
+                else:
+                    game["status"] = "failed"
                 game["failed_guesses"].append(letter)
-                game["status"] = "failed"
             self.db.insert(game)
-        return game #TODO: fix
+            return game
+        else:
+            return None
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -4,6 +4,7 @@ import time
 import md5
 import hashlib
 import json
+import urllib2
 
 class GameService(object):
 
@@ -58,30 +59,37 @@ class GameService(object):
 
 app = Flask(__name__)
 game_service = GameService()
+EVENT_URL = "http://127.0.0.1/publish"
 
 @app.route("/")
 def main():
     return render_template("index.html")
 
+#TODO: dry up
+
 @app.route("/api/game/create/<word>")
 def create_game(word):
     data = game_service.create_game(str(word))
-    return json.dumps(data, default=json_util.default)
+    urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
+                    json.dumps(data, default=json_util.default))
 
 @app.route("/api/game/join/<channel>")
 def join_game(channel):
     data = game_service.add_player_to_game(str(channel))
-    return json.dumps(data, default=json_util.default)
+    urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
+                    json.dumps(data, default=json_util.default))
 
 @app.route("/api/game/guess/<channel>/<letter>")
 def guess(channel, letter):
     data = game_service.guess(str(channel), str(letter))
-    return json.dumps(data, default=json_util.default)
+    urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
+                    json.dumps(data, default=json_util.default))
 
 @app.route("/api/game/info/<channel>")
 def game_info(channel):
     data = game_service.get_info(str(channel))
-    return json.dumps(data, default=json_util.default)
+    urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
+                    json.dumps(data, default=json_util.default))
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -72,24 +72,28 @@ def create_game(word):
     data = game_service.create_game(str(word))
     urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
                     json.dumps(data, default=json_util.default))
+    return ""
 
 @app.route("/api/game/join/<channel>")
 def join_game(channel):
     data = game_service.add_player_to_game(str(channel))
     urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
                     json.dumps(data, default=json_util.default))
+    return ""
 
 @app.route("/api/game/guess/<channel>/<letter>")
 def guess(channel, letter):
     data = game_service.guess(str(channel), str(letter))
     urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
                     json.dumps(data, default=json_util.default))
+    return ""
 
 @app.route("/api/game/info/<channel>")
 def game_info(channel):
     data = game_service.get_info(str(channel))
     urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
                     json.dumps(data, default=json_util.default))
+    return ""
 
 if __name__ == "__main__":
     app.run(debug=True)

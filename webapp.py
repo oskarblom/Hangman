@@ -70,9 +70,9 @@ def main():
 @app.route("/api/game/create/<word>")
 def create_game(word):
     data = game_service.create_game(str(word))
-    urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
+#    urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
                     json.dumps(data, default=json_util.default))
-    return ""
+    return "http://oskarblom.se/api/game/join/" + data["channel"]
 
 @app.route("/api/game/join/<channel>")
 def join_game(channel):

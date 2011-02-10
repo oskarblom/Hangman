@@ -61,6 +61,9 @@ app = Flask(__name__)
 game_service = GameService()
 EVENT_URL = "http://127.0.0.1/publish"
 
+
+# Regular routes
+
 @app.route("/")
 def main():
     return render_template("index.html")

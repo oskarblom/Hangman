@@ -11,7 +11,18 @@
 </form>
     <script type="text/javascript">
         $(document).ready(function() {
-           $("#start-game").click(function(ev) {
+            $("#create-button").click(function(ev) {
+                ev.preventDefault();
+                var word = $("#create-textbox").val();
+                if(word != "") {
+                    $.getJSON('/api/game/create/' + word, function(data) {
+                        alert(data.opponent_url + data.subscription_url);
+                    });
+                } else {
+                    alert("Enter a word first");
+                }
+            });
+            $("#start-game").click(function(ev) {
                 $("#create").show();
                 $(this).remove();
             });

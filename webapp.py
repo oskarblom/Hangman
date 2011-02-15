@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from pymongo import Connection, json_util
 import time
-import md5
 import hashlib
 import json
 import urllib2
@@ -62,6 +61,8 @@ game_service = GameService()
 HOST = "hangman"
 EVENT_URL = "http://127.0.0.1/publish"
 
+def build_json_response(response_data):
+    return json.dumps(response_data, 200, {"Content-type": "application/json"})
 
 # Regular routes
 
@@ -73,9 +74,11 @@ def main():
 @app.route("/api/game/create/<word>")
 def create_game(word):
     data = game_service.create_game(str(word))
-    return json.dumps({
+    response = {
         "opponent_url" : "/api/game/join/" + data["channel"],
-        "subscription_url: ""
+        "subscription_url" : "/subscribe?id=" + data["channel"]
+    }
+    return build_json_response(response) 
 
 @app.route("/api/game/join/<channel>")
 def join_game(channel):

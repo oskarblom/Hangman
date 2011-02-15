@@ -1,4 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-hello, block!
+<a href="#" id="start-game">Click here to start a new game!</a>
+<form id="create">
+    <label for="create-textbox">Word<label>
+    <input type="textbox" id="create-textbox"></input>
+    <input type="button" id="create-button" value="Create game"></input>
+</form>
 {% endblock %}

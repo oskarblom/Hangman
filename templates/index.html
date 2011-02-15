@@ -1,9 +1,20 @@
 {% extends "base.html" %}
+{% block head %}
+{{ super() }}
+{% endblock %}
 {% block content %}
-<a href="#" id="start-game">Click here to start a new game!</a>
+<a href="#" id="start-game">Click to start a new game!</a>
 <form id="create">
-    <label for="create-textbox">Word<label>
+    <label for="create-textbox">Word:<label>
     <input type="textbox" id="create-textbox"></input>
     <input type="button" id="create-button" value="Create game"></input>
 </form>
+    <script type="text/javascript">
+        $(document).ready(function() {
+           $("#start-game").click(function(ev) {
+                $("#create").show();
+                $(this).remove();
+            });
+        });
+    </script>
 {% endblock %}

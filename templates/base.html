@@ -1,6 +1,7 @@
 <html>
     <head>
-        {% block scripts %}
+        {% block head %}
+        <link href="static/css/hangman.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="static/js/jquery-1.5.min.js"></script>
         {% endblock %}
         <title>{% block title %} hangman.se {% endblock %}</title>
@@ -11,6 +12,5 @@
         {% block content %} {% endblock %}
         </div>
     <body>
-    
 </html>
 

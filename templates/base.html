@@ -1,0 +1,16 @@
+<html>
+    <head>
+        {% block scripts %}
+        <script type="text/javascript" src="static/js/jquery-1.5.min.js"></script>
+        {% endblock %}
+        <title>{% block title %} hangman.se {% endblock %}</title>
+    </head>
+
+    <body>
+        <div id="container">
+        {% block content %} {% endblock %}
+        </div>
+    <body>
+    
+</html>
+

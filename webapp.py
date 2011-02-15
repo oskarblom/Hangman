@@ -67,7 +67,6 @@ EVENT_URL = "http://127.0.0.1/publish"
 @app.route("/")
 def main():
     return render_template("index.html")
-
 #TODO: dry up
 
 @app.route("/api/game/create/<word>")
@@ -75,7 +74,7 @@ def create_game(word):
     data = game_service.create_game(str(word))
 #    urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
                     #json.dumps(data, default=json_util.default))
-    return "http://oskarblom.se/api/game/join/" + data["channel"]
+    return "/api/game/join/" + data["channel"]
 
 @app.route("/api/game/join/<channel>")
 def join_game(channel):

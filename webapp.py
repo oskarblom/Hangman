@@ -15,6 +15,7 @@ class GameService(object):
     def add_player_to_game(self, channel):
         game = self.db.games.find_one({"channel": channel})
         game["participants"] = 2
+        game["status"] = "started"
         self.db.games.save(game)
         return game
 
@@ -28,7 +29,7 @@ class GameService(object):
         game = {
             "word": word,
             "channel": channel,
-            "status": "started",
+            "status": "pending",
             "word_state": word_state,
             "failed_guesses": [],
             "participants": 1
@@ -38,16 +39,19 @@ class GameService(object):
 
     def guess(self, channel, letter):
         game = self.db.games.find_one({"channel" : channel})
-        if game["status"] != "over":
+        if not game["status"].startswith("over"):
             if letter in game["failed_guesses"] or letter in game["word_state"]: #Already have that
                 game["status"] = "duplicate"
             elif letter in game["word"]:
-               [game["word_state"].pop(i) and game["word_state"].insert(i, letter)
-                for i in range(len(game["word"])) if game["word"][i] == letter]
-               game["status"] = "correct"
+                [game["word_state"].pop(i) and game["word_state"].insert(i, letter)
+                 for i in range(len(game["word"])) if game["word"][i] == letter]
+                if "_" in game["word_state"]:
+                    game["status"] = "correct"
+                else:
+                    game["status"] = "over-success"
             else:
                 if len(game["failed_guesses"]) + 1 == self.MAX_TRIES:
-                    game["status"] = "over"
+                    game["status"] = "over-failed"
                 else:
                     game["status"] = "failed"
                 game["failed_guesses"].append(letter)
@@ -69,6 +73,11 @@ def build_json_response(response_data):
 @app.route("/")
 def main():
     return render_template("index.html")
+
+@app.route("/join/<channel>")
+def join(channel):
+    return render_template("join.html", channel_id=channel)
+
 #TODO: dry up
 
 @app.route("/api/game/create/<word>")

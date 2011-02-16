@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block head %}
 {{ super() }}
+<script type="text/javascript" src="/static/js/subscribe.js"></script>
 {% endblock %}
 {% block content %}
 <a href="#" id="start-game">Click to start a new game!</a>
@@ -17,6 +18,8 @@
                 if(word != "") {
                     $.getJSON('/api/game/create/' + word, function(data) {
                         alert(data.opponent_url + data.subscription_url);
+                        var sub = new Subscription(evHandler);
+                        sub.subscribe(data.subscription_url);
                     });
                 } else {
                     alert("Enter a word first");

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<script type="text/javascript" src="/static/js/subscribe.js"></script>
+{% endblock %}
+{% block content %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        var sub = new Subscription(evHandler);
+        sub.subscribe('/subscribe?id={{channel_id}}');
+        $.getJSON('/api/game/join/{{channel_id}}', function(data) {
+        });
+    });
+</script>
+{% endblock %}

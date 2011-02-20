@@ -33,7 +33,22 @@ function Subscription(eventHandlers) {
 }
 
 var evHandler = {
+    overSuccess: function(data) {
+        alert("Success!");
+    },
+    overFailed: function(data) {
+        alert("Failed!");
+    },
+    duplicate: function(data) {
+       alert("You already used that letter!");
+    },
     started: function(data) {
-        alert(data);
+        console.log(data);
+    },
+    failed: function(data) {
+        console.log(data);
+    },
+    correct: function(data) {
+        console.log(data);
     }
 };

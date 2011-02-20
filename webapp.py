@@ -76,7 +76,8 @@ def main():
 
 @app.route("/join/<channel>")
 def join(channel):
-    return render_template("join.html", channel_id=channel)
+    letters = [chr(i) for i in range(ord("A"), ord("Z") + 1)]
+    return render_template("join.html", channel_id=channel, letters=letters)
 
 #TODO: dry up
 

@@ -1,15 +1,35 @@
 {% extends "base.html" %}
-{% block head %}
-{{ super() }}
-<script type="text/javascript" src="/static/js/subscribe.js"></script>
-{% endblock %}
 {% block content %}
 <script type="text/javascript">
     $(document).ready(function() {
+        hMan = new Hangman(document.getElementById("holder")); 
+        evHandler.failed = function(data) {
+            hMan.drawNextPart();
+        };
+        evHandler.correct = function(data) {
+            $('#status').html('');
+            $.each(data.word_state, function(pos) {
+                $('#status').append(data.word_state[pos]);
+            });
+        };
         var sub = new Subscription(evHandler);
         sub.subscribe('/subscribe?id={{channel_id}}');
         $.getJSON('/api/game/join/{{channel_id}}', function(data) {
+            $('.letter').click(function(ev) {
+                $.getJSON('/api/game/guess/{{channel_id}}/' + $(this).html());
+            });
         });
     });
 </script>
+<div id="status">
+    
+</div>
+<div>
+{% for letter in letters %}
+    <span><a href="#" class="letter">{{letter}}</a></span>
+{% endfor %}
+</div>
+<div id="holder">
+
+</div>
 {% endblock %}

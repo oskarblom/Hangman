@@ -1,8 +1,6 @@
 {% extends "base.html" %}
-{% block head %}
-{{ super() }}
-{% endblock %}
 {% block content %}
+<div id="status"></div>
 <a href="#" id="start-game">Click to start a new game!</a>
 <form id="create">
     <label for="create-textbox">Word:<label>
@@ -16,7 +14,7 @@
                 var word = $("#create-textbox").val();
                 if(word != "") {
                     $.getJSON('/api/game/create/' + word, function(data) {
-                        alert(data.opponent_url + data.subscription_url);
+                        $('#status').html('<span>http://' + window.location.hostname + data.opponent_url+'</span>');
                         var sub = new Subscription(evHandler);
                         sub.subscribe(data.subscription_url);
                     });

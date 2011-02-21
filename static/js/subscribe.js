@@ -27,6 +27,7 @@ function Subscription(eventHandlers) {
                         break;
                 }
                 self.subscribe(url);
+            }, complete: function(jqXHR, textStatus) {
             }
         }); 
     };
@@ -43,12 +44,14 @@ var evHandler = {
        alert("You already used that letter!");
     },
     started: function(data) {
-        console.log(data);
+        //console.log(data);
     },
     failed: function(data) {
-        console.log(data);
+        //console.log(data);
     },
     correct: function(data) {
-        console.log(data);
+        //console.log(data);
     }
 };
+
+

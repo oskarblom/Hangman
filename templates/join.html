@@ -6,19 +6,24 @@
         evHandler.failed = function(data) {
             hMan.drawNextPart();
         };
+        evHandler.overFailed = function(data) {
+            hMan.drawNextPart();
+        };
         evHandler.correct = function(data) {
             $('#status').html('');
             $.each(data.word_state, function(pos) {
                 $('#status').append(data.word_state[pos]);
             });
         };
-        var sub = new Subscription(evHandler);
-        sub.subscribe('/subscribe?id={{channel_id}}');
-        $.getJSON('/api/game/join/{{channel_id}}', function(data) {
-            $('.letter').click(function(ev) {
-                $.getJSON('/api/game/guess/{{channel_id}}/' + $(this).html());
+        setTimeout(function(){
+            var sub = new Subscription(evHandler);
+            sub.subscribe('/subscribe?id={{channel_id}}');
+            $.getJSON('/api/game/join/{{channel_id}}', function(data) {
+                $('.letter').click(function(ev) {
+                    $.getJSON('/api/game/guess/{{channel_id}}/' + $(this).html());
+                });
             });
-        });
+        }, 600);
     });
 </script>
 <div id="status">

@@ -7,7 +7,7 @@ import urllib2
 
 class GameService(object):
 
-    MAX_TRIES = 10
+    MAX_TRIES = 12
 
     def __init__(self):
         self.db = Connection().game_db
@@ -85,7 +85,7 @@ def join(channel):
 def create_game(word):
     data = game_service.create_game(str(word))
     response = {
-        "opponent_url" : "/api/game/join/" + data["channel"],
+        "opponent_url" : "/join/" + data["channel"],
         "subscription_url" : "/subscribe?id=" + data["channel"]
     }
     return build_json_response(response) 

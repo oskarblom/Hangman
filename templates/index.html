@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<div id="status"></div>
 <a href="#" id="start-game">Click to start a new game!</a>
 <form id="create">
     <label for="create-textbox">Word:<label>
@@ -15,11 +14,14 @@
                 if(word != "") {
                     $.getJSON('/api/game/create/' + word, function(data) {
                         $('#status').html('<span>http://' + window.location.hostname + data.opponent_url+'</span>');
-                        var sub = new Subscription(evHandler);
+                        var handler = new EventHandler(hMan, $('div#status'), function(data) {
+
+                        });
+                        var sub = new Subscription(handler.handlers);
                         sub.subscribe(data.subscription_url);
                     });
                 } else {
-                    alert("Enter a word first");
+                    alert("Enter a word first!");
                 }
             });
             $("#start-game").click(function(ev) {

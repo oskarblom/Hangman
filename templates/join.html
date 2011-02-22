@@ -2,39 +2,24 @@
 {% block content %}
 <script type="text/javascript">
     $(document).ready(function() {
-        hMan = new Hangman(document.getElementById("holder")); 
-        evHandler.failed = function(data) {
-            hMan.drawNextPart();
-        };
-        evHandler.overFailed = function(data) {
-            hMan.drawNextPart();
-        };
-        evHandler.correct = function(data) {
-            $('#status').html('');
-            $.each(data.word_state, function(pos) {
-                $('#status').append(data.word_state[pos]);
-            });
-        };
+        var hMan = new Hangman(document.getElementById("holder"));
+        var handler = new EventHandler(hMan, $('div#status'), function(data) {
+
+        });
         setTimeout(function(){
-            var sub = new Subscription(evHandler);
+            var sub = new Subscription(handler.handlers);
             sub.subscribe('/subscribe?id={{channel_id}}');
             $.getJSON('/api/game/join/{{channel_id}}', function(data) {
                 $('.letter').click(function(ev) {
                     $.getJSON('/api/game/guess/{{channel_id}}/' + $(this).html());
                 });
             });
-        }, 600);
+        }, 500);
     });
 </script>
-<div id="status">
-    
-</div>
 <div>
 {% for letter in letters %}
-    <span><a href="#" class="letter">{{letter}}</a></span>
+    <span><a href="" id="letter-{{letter}}" class="letter">{{letter}}</a></span>
 {% endfor %}
-</div>
-<div id="holder">
-
 </div>
 {% endblock %}

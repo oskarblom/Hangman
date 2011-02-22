@@ -33,25 +33,38 @@ function Subscription(eventHandlers) {
     };
 }
 
-var evHandler = {
-    overSuccess: function(data) {
-        alert("Success!");
-    },
-    overFailed: function(data) {
-        alert("Failed!");
-    },
-    duplicate: function(data) {
-       alert("You already used that letter!");
-    },
-    started: function(data) {
-        //console.log(data);
-    },
-    failed: function(data) {
-        //console.log(data);
-    },
-    correct: function(data) {
-        //console.log(data);
-    }
-};
 
+function EventHandler(hangman, statusContainer, observer) {
+    
+    var hMan = hangman;
+    var statCont = statusContainer;
+    var obs = observer;
+    
+    this.handlers = {
+        overSuccess: function(data) {
+            statCont.html("Correct! The man lives.");
+            obs(data);
+        },
+        overFailed: function(data) {
+            hMan.drawNextPart();
+            statCont.html("Failed! The man hangs.");
+            obs(data);
+        },
+        duplicate: function(data) {
+            statCont.html("That letter has already been used. Try something else!");
+            obs(data);
+        },
+        started: function(data) {
+            statCont.html("Both players are now connected. Game on!");
+            obs(data);
+        },
+        failed: function(data) {
+            hMan.drawNextPart();
+            obs(data);
+        },
+        correct: function(data) {
+            obs(data);
+        }
+    };
+}
 

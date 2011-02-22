@@ -10,7 +10,8 @@
             var sub = new Subscription(handler.handlers);
             sub.subscribe('/subscribe?id={{channel_id}}');
             $.getJSON('/api/game/join/{{channel_id}}', function(data) {
-                $('.letter').click(function(ev) {
+                $('[class^="letter"]').click(function(ev) {
+                    ev.preventDefault();
                     $.getJSON('/api/game/guess/{{channel_id}}/' + $(this).html());
                 });
             });

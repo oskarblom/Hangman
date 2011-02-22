@@ -63,6 +63,11 @@ function EventHandler(hangman, statusContainer, observer) {
             obs(data);
         },
         correct: function(data) {
+            var wordState = "";
+            $.each(data.word_state, function(i){
+                wordState = data.word_state[i];
+            });
+            statCont.html(wordState);
             obs(data);
         }
     };

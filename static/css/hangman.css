@@ -5,3 +5,7 @@ form#create {
 .status-container {
     height: 25px;
 }
+
+#word-state {
+    letter-spacing: 3px;
+}

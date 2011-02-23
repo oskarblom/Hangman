@@ -1,3 +1,7 @@
 form#create {
     display: none;
 }
+
+.status-container {
+    height 25px;
+}

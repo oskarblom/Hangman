@@ -34,11 +34,20 @@ function Subscription(eventHandlers) {
 }
 
 
-function EventHandler(hangman, statusContainer, observer) {
+function EventHandler(hangman, statusContainer, wordStateContainer, observer) {
     
     var hMan = hangman;
     var statCont = statusContainer;
+    var wordCont = wordStateContainer;
     var obs = observer;
+    
+    var.stringFromList = function(list) {
+        var wd = "";
+        $.each(list, function(i){
+            wd = data.word_state[i];
+        });
+        return wd;
+    };
     
     this.handlers = {
         overSuccess: function(data) {
@@ -56,6 +65,7 @@ function EventHandler(hangman, statusContainer, observer) {
         },
         started: function(data) {
             statCont.html("Both players are now connected. Game on!");
+            statCont.html(stringFromList(data.word_state));
             obs(data);
         },
         failed: function(data) {
@@ -63,13 +73,11 @@ function EventHandler(hangman, statusContainer, observer) {
             obs(data);
         },
         correct: function(data) {
-            var wordState = "";
-            $.each(data.word_state, function(i){
-                wordState = data.word_state[i];
-            });
-            statCont.html(wordState);
+            wordCont.html(stringFromList(data.word_state));
             obs(data);
         }
+        
+        
     };
 }
 

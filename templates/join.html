@@ -3,8 +3,13 @@
 <script type="text/javascript">
     $(document).ready(function() {
         var hMan = new Hangman(document.getElementById("holder"));
-        var handler = new EventHandler(hMan, $('div#status'), function(data) {
-
+        var handler = new EventHandler(hMan, $('div#status'), $('div#word-state'), function(data) {
+            switch(data.status) {
+                case "failed":
+                case "correct":
+                    
+                    break;
+            }
         });
         setTimeout(function(){
             var sub = new Subscription(handler.handlers);
@@ -12,7 +17,9 @@
             $.getJSON('/api/game/join/{{channel_id}}', function(data) {
                 $('[class^="letter"]').click(function(ev) {
                     ev.preventDefault();
-                    $.getJSON('/api/game/guess/{{channel_id}}/' + $(this).html());
+                    $.getJSON('/api/game/guess/{{channel_id}}/' + $(this).html(), function(data){
+                        $(this).remove();
+                    });
                 });
             });
         }, 500);

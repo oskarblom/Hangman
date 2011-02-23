@@ -7,7 +7,7 @@ import urllib2
 
 class GameService(object):
 
-    MAX_TRIES = 12
+    MAX_TRIES = 11
 
     def __init__(self):
         self.db = Connection().game_db

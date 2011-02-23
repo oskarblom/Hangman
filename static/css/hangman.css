@@ -9,3 +9,15 @@ form#create {
 #word-state {
     letter-spacing: 3px;
 }
+
+#holder {
+    height: 150px;
+    width: 300px;
+    margin: inherit;
+}
+
+#container {
+    width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}

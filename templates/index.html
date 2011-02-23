@@ -13,7 +13,8 @@
                 var word = $("#create-textbox").val();
                 if(word != "" && word.match(/^[A-Za-z]+$/)) {
                     $.getJSON('/api/game/create/' + word, function(data) {
-                        $('#status').html('<span>http://' + window.location.hostname + data.opponent_url+'</span>');
+                        $("#create").remove();
+                        $('#status').html('<p>Send this link to your opponent:</p><span>http://' + window.location.hostname + data.opponent_url+'</span>');
                         var hMan = new Hangman(document.getElementById("holder"));
                         var handler = new EventHandler(hMan, $('div#status'), $('div#word-state'),  function(data) {
 

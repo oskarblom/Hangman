@@ -41,7 +41,7 @@ function EventHandler(hangman, statusContainer, wordStateContainer, observer) {
     var wordCont = wordStateContainer;
     var obs = observer;
     
-    var.stringFromList = function(list) {
+    var stringFromList = function(list) {
         var wd = "";
         $.each(list, function(i){
             wd = list[i];

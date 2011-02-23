@@ -44,7 +44,7 @@ function EventHandler(hangman, statusContainer, wordStateContainer, observer) {
     var stringFromList = function(list) {
         var wd = "";
         $.each(list, function(i){
-            wd = list[i];
+            wd += list[i];
         });
         return wd;
     }

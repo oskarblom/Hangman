@@ -87,13 +87,13 @@ def create_game(word):
         word = word.decode("ascii").upper()
         data = game_service.create_game(str(word))
         response = {
-            "status": "OK"
+            "status": "OK",
             "opponent_url" : "/join/" + data["channel"],
             "subscription_url" : "/subscribe?id=" + data["channel"]
         }
     except UnicodeError:
         response = {
-            "status": "ERROR"
+            "status": "ERROR",
             "message": "Validation failed"
         }
     return build_json_response(response) 

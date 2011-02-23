@@ -50,7 +50,7 @@ class GameService(object):
                 else:
                     game["status"] = "over-success"
             else:
-                if len(game["failed_guesses"]) + 1 == self.MAX_TRIES:
+                if len(game["failed_guesses"]) == self.MAX_TRIES:
                     game["status"] = "over-failed"
                 else:
                     game["status"] = "failed"

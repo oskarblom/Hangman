@@ -83,7 +83,7 @@ function Hangman(canvas/*, wordLength*/) {
                         );
                         break;
                     default:
-                        alert('dead');
+                        //alert('dead');
                 }
                 state++;
             };

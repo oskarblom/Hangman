@@ -52,6 +52,7 @@ function EventHandler(hangman, statusContainer, wordStateContainer, observer) {
     this.handlers = {
         overSuccess: function(data) {
             statCont.html("Correct! The man lives.");
+            wordCont.html(stringFromList(data.word_state));
             obs(data);
         },
         overFailed: function(data) {

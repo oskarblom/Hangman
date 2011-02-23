@@ -11,7 +11,7 @@
             $("#create-button").click(function(ev) {
                 ev.preventDefault();
                 var word = $("#create-textbox").val();
-                if(word != "" && word.match(/[A-Za-z]+/)) {
+                if(word != "" && word.match(/^[A-Za-z]+$/)) {
                     $.getJSON('/api/game/create/' + word, function(data) {
                         $('#status').html('<span>http://' + window.location.hostname + data.opponent_url+'</span>');
                         var hMan = new Hangman(document.getElementById("holder"));

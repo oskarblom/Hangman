@@ -65,7 +65,7 @@ function EventHandler(hangman, statusContainer, wordStateContainer, observer) {
         },
         started: function(data) {
             statCont.html("Both players are now connected. Game on!");
-            statCont.html(stringFromList(data.word_state));
+            wordCont.html(stringFromList(data.word_state));
             obs(data);
         },
         failed: function(data) {

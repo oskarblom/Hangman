@@ -73,6 +73,7 @@ function EventHandler(hangman, statusContainer, wordStateContainer, observer) {
             obs(data);
         },
         correct: function(data) {
+            wordCont.html("");
             wordCont.html(stringFromList(data.word_state));
             obs(data);
         }

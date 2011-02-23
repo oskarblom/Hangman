@@ -47,7 +47,7 @@ function EventHandler(hangman, statusContainer, wordStateContainer, observer) {
             wd = list[i];
         });
         return wd;
-    };
+    }
     
     this.handlers = {
         overSuccess: function(data) {

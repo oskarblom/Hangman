@@ -79,15 +79,23 @@ def join(channel):
     letters = [chr(i) for i in range(ord("A"), ord("Z") + 1)]
     return render_template("join.html", channel_id=channel, letters=letters)
 
-#TODO: dry up
+#TODO: dry up and use the built in json capabilities from Flask
 
 @app.route("/api/game/create/<word>")
 def create_game(word):
-    data = game_service.create_game(str(word))
-    response = {
-        "opponent_url" : "/join/" + data["channel"],
-        "subscription_url" : "/subscribe?id=" + data["channel"]
-    }
+    try:
+        word = word.decode("ascii").upper()
+        data = game_service.create_game(str(word))
+        response = {
+            "status": "OK"
+            "opponent_url" : "/join/" + data["channel"],
+            "subscription_url" : "/subscribe?id=" + data["channel"]
+        }
+    except UnicodeError:
+        response = {
+            "status": "ERROR"
+            "message": "Validation failed"
+        }
     return build_json_response(response) 
 
 @app.route("/api/game/join/<channel>")

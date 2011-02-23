@@ -5,9 +5,9 @@
         var hMan = new Hangman(document.getElementById("holder"));
         var handler = new EventHandler(hMan, $('div#status'), $('div#word-state'), function(data) {
             switch(data.status) {
-                case "failed":
-                case "correct":
-                    
+                case "over-success":
+                case "over-failed":
+                    $('#letters').remove();
                     break;
             }
         });
@@ -26,7 +26,7 @@
         }, 500);
     });
 </script>
-<div>
+<div id="letters">
 {% for letter in letters %}
     <span><a href="" id="letter-{{letter}}" class="letter">{{letter}}</a></span>
 {% endfor %}

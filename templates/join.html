@@ -16,9 +16,10 @@
             sub.subscribe('/subscribe?id={{channel_id}}');
             $.getJSON('/api/game/join/{{channel_id}}', function(data) {
                 $('[class^="letter"]').click(function(ev) {
+                    var letterElem = $(this);
                     ev.preventDefault();
-                    $.getJSON('/api/game/guess/{{channel_id}}/' + $(this).html(), function(data){
-                        $(this).remove();
+                    $.getJSON('/api/game/guess/{{channel_id}}/' + letterElem.html(), function(data){
+                        letterElem.remove();
                     });
                 });
             });

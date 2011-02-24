@@ -57,7 +57,7 @@ function EventHandler(hangman, statusContainer, wordStateContainer, observer) {
         },
         overFailed: function(data) {
             hMan.drawNextPart();
-            statCont.html("Failed! The man hangs.");
+            statCont.html("Failed! The man hangs. The word that would have saved him was: " + data.word);
             obs(data);
         },
         duplicate: function(data) {

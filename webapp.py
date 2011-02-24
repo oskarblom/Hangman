@@ -76,10 +76,12 @@ def main():
 
 @app.route("/join/<channel>")
 def join(channel):
+    #TODO import ascii instead
     letters = [chr(i) for i in range(ord("A"), ord("Z") + 1)]
     return render_template("join.html", channel_id=channel, letters=letters)
 
 #TODO: dry up and use the built in json capabilities from Flask
+#TODO: Isolate event publishing into one entry point, so the transport can't be changed.
 
 @app.route("/api/game/create/<word>")
 def create_game(word):

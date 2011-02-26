@@ -4,11 +4,11 @@
 <form id="create">
     <label for="create-textbox">Word:<label>
     <input type="textbox" id="create-textbox"></input>
-    <input type="button" id="create-button" value="Create game"></input>
+    <input type="submit" id="create-button" value="Create game"></input>
 </form>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#create-button").click(function(ev) {
+            $("#create").submit(function(ev) {
                 ev.preventDefault();
                 var word = $("#create-textbox").val();
                 if(word != "" && word.match(/^[A-Za-z]+$/)) {

@@ -82,6 +82,7 @@ def join(channel):
 
 #TODO: dry up and use the built in json capabilities from Flask
 #TODO: Isolate event publishing into one entry point, so the transport can't be changed.
+#TODO: Do the above
 
 @app.route("/api/game/create/<word>")
 def create_game(word):

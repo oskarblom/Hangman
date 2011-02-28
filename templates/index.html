@@ -14,11 +14,13 @@
                 if(word != "" && word.match(/^[A-Za-z]+$/)) {
                     $.getJSON('/api/game/create/' + word, function(data) {
                         $("#create").remove();
-                        $('#status').html('<p>Send this link to your opponent:</p><span>http://' + window.location.hostname + data.opponent_url+'</span>');
+                        $('#status').html("<p>Stay at this page and send this link to your opponent:</p><span>http://" + window.location.hostname + data.opponent_url+"</span>");
                         var hMan = new Hangman(document.getElementById("holder"));
-                        var handler = new EventHandler(hMan, $('div#status'), $('div#word-state'),  function(data) {
-
-                        });
+                        var handler = new EventHandler(
+                            hMan, $('div#status'),
+                            $('div#word-state'),
+                            function(data) {}
+                        );
                         var sub = new Subscription(handler.handlers);
                         sub.subscribe(data.subscription_url);
                     });

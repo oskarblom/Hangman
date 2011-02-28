@@ -65,6 +65,7 @@ game_service = GameService()
 HOST = "hangman"
 EVENT_URL = "http://127.0.0.1/publish"
 
+#TODO: Use the flask builtin json capabilities for this.
 def build_json_response(response_data):
     return json.dumps(response_data, 200, {"Content-type": "application/json"})
 

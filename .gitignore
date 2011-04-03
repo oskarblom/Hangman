@@ -3,3 +3,5 @@ env/
 notes
 .project
 .pydevproject
+.settings/
+webapp.pyc

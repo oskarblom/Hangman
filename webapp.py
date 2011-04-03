@@ -5,6 +5,12 @@ import hashlib
 import json
 import urllib2
 
+EVENT_URL = "http://127.0.0.1/publish"
+
+def publish_event(channel, data):
+    urllib2.urlopen(EVENT_URL + "?id=%s" % channel, 
+                    json.dumps(data, default=json_util.default))
+
 class GameService(object):
 
     MAX_TRIES = 10
@@ -62,8 +68,7 @@ class GameService(object):
 
 app = Flask(__name__)
 game_service = GameService()
-HOST = "hangman"
-EVENT_URL = "http://127.0.0.1/publish"
+
 
 #TODO: Use the flask builtin json capabilities for this.
 def build_json_response(response_data):
@@ -105,22 +110,19 @@ def create_game(word):
 @app.route("/api/game/join/<channel>")
 def join_game(channel):
     data = game_service.add_player_to_game(str(channel))
-    urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
-                    json.dumps(data, default=json_util.default))
+    publish_event(data["channel"], data)
     return ""
 
 @app.route("/api/game/guess/<channel>/<letter>")
 def guess(channel, letter):
     data = game_service.guess(str(channel), str(letter))
-    urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
-                    json.dumps(data, default=json_util.default))
+    publish_event(data["channel"], data)
     return ""
 
 @app.route("/api/game/info/<channel>")
 def game_info(channel):
     data = game_service.get_info(str(channel))
-    urllib2.urlopen(EVENT_URL + "?id=%s" % data["channel"], 
-                    json.dumps(data, default=json_util.default))
+    publish_event(data["channel"], data)
     return ""
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from pymongo import Connection, json_util
 import time
 import hashlib
@@ -69,11 +69,6 @@ class GameService(object):
 app = Flask(__name__)
 game_service = GameService()
 
-
-#TODO: Use the flask builtin json capabilities for this.
-def build_json_response(response_data):
-    return json.dumps(response_data, 200, {"Content-type": "application/json"})
-
 # Regular routes
 
 @app.route("/")
@@ -87,8 +82,6 @@ def join(channel):
     return render_template("join.html", channel_id=channel, letters=letters)
 
 #TODO: dry up and use the built in json capabilities from Flask
-#TODO: Isolate event publishing into one entry point, so the transport can't be changed.
-#TODO: Do the above
 
 @app.route("/api/game/create/<word>")
 def create_game(word):
@@ -105,7 +98,7 @@ def create_game(word):
             "status": "ERROR",
             "message": "Validation failed"
         }
-    return build_json_response(response) 
+    return jsonify(response) 
 
 @app.route("/api/game/join/<channel>")
 def join_game(channel):

@@ -1,9 +1,12 @@
+# coding:utf-8
 from flask import Flask, render_template, jsonify
 from pymongo import Connection, json_util
+from string import ascii_uppercase
 import time
 import hashlib
 import json
 import urllib2
+
 
 EVENT_URL = "http://127.0.0.1/publish"
 
@@ -32,6 +35,7 @@ class GameService(object):
     def create_game(self, word):
         channel = hashlib.md5(str(time.time())).hexdigest()
         word_state = ["_"] * len(word)
+        print channel
         game = {
             "word": word,
             "channel": channel,
@@ -77,27 +81,20 @@ def main():
 
 @app.route("/join/<channel>")
 def join(channel):
-    #TODO import ascii instead
-    letters = [chr(i) for i in range(ord("A"), ord("Z") + 1)]
+    letters = [letter for letter in ascii_uppercase] + ['Å', 'Ä', 'Ö']
+    print letters
     return render_template("join.html", channel_id=channel, letters=letters)
 
 #TODO: dry up and use the built in json capabilities from Flask
 
 @app.route("/api/game/create/<word>")
 def create_game(word):
-    try:
-        word = word.decode("ascii").upper()
-        data = game_service.create_game(str(word))
-        response = {
-            "status": "OK",
-            "opponent_url" : "/join/" + data["channel"],
-            "subscription_url" : "/subscribe?id=" + data["channel"]
-        }
-    except UnicodeError:
-        response = {
-            "status": "ERROR",
-            "message": "Validation failed"
-        }
+    data = game_service.create_game(unicode(str(word)).upper())
+    response = {
+        "status": "OK",
+        "opponent_url" : "/join/" + data["channel"],
+        "subscription_url" : "/subscribe?id=" + data["channel"]
+    }
     return jsonify(response) 
 
 @app.route("/api/game/join/<channel>")
@@ -119,4 +116,6 @@ def game_info(channel):
     return ""
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    debug = False
+    app.run(debug=debug)
+    

@@ -81,7 +81,7 @@ def main():
 
 @app.route("/join/<channel>")
 def join(channel):
-    letters = [letter for letter in ascii_uppercase] + ['Å', 'Ä', 'Ö']
+    letters = [letter for letter in ascii_uppercase]# + ['Å', 'Ä', 'Ö']
     print letters
     return render_template("join.html", channel_id=channel, letters=letters)
 
@@ -116,6 +116,6 @@ def game_info(channel):
     return ""
 
 if __name__ == "__main__":
-    debug = False
+    debug = True
     app.run(debug=debug)
     

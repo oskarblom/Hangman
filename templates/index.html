@@ -11,7 +11,7 @@
             $("#create").submit(function(ev) {
                 ev.preventDefault();
                 var word = $("#create-textbox").val();
-                if(word != "" && word.match(/^[A-Za-z]+$/)) {
+                if(word != "" && word.match(/^[A-Za-zÅÄÖåäö]+$/)) {
                     $.getJSON('/api/game/create/' + word, function(data) {
                         $("#create").remove();
                         $('#status').html("<p>Stay at this page and send this link to your opponent:</p><span>http://" + window.location.hostname + data.opponent_url+"</span>");

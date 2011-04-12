@@ -16,9 +16,9 @@
             sub.subscribe('/subscribe?id={{channel_id}}');
             $.getJSON('/api/game/join/{{channel_id}}', function(data) {
                 $('[class^="letter"]').click(function(ev) {
-                	$('#letters').toggle();
-                    var letterElem = $(this);
                     ev.preventDefault();
+                    $('#letters').toggle();
+                    var letterElem = $(this);
                     $.getJSON('/api/game/guess/{{channel_id}}/' + letterElem.html(), function(data){
                         letterElem.remove();
                         $('#letters').toggle();

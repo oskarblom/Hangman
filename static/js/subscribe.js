@@ -7,7 +7,7 @@ function Subscription(eventHandlers) {
             cache: 'false',
             success: function(data) {
                 switch(data.status) {
-                    case "over-success":
+                    case "over-succefss":
                         handlers.overSuccess(data);
                         break;
                     case "over-failed":

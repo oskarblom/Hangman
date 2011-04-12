@@ -19,7 +19,7 @@
                         var handler = new EventHandler(
                             hMan, $('div#status'),
                             $('div#word-state'),
-                            function(data) {}
+                            function() {}
                         );
                         var sub = new Subscription(handler.handlers);
                         sub.subscribe(data.subscription_url);

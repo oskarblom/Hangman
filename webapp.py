@@ -49,26 +49,25 @@ class GameService(object):
 
     def guess(self, channel, letter):
         game = self.db.games.find_one({"channel" : channel})
-        if not game["status"].startswith("over"):
-            if letter in game["failed_guesses"] or letter in game["word_state"]: #Already have that
-                game["status"] = "duplicate"
-            elif letter in game["word"]:
-                [game["word_state"].pop(i) and game["word_state"].insert(i, letter)
-                 for i in range(len(game["word"])) if game["word"][i] == letter]
-                if "_" in game["word_state"]:
-                    game["status"] = "correct"
-                else:
-                    game["status"] = "over-success"
-            else:
-                if len(game["failed_guesses"]) == self.MAX_TRIES:
-                    game["status"] = "over-failed"
-                else:
-                    game["status"] = "failed"
-                game["failed_guesses"].append(letter)
-            self.db.games.save(game)
-            return game
-        else:
+        if game["status"].startswith("over"):
             return None
+        if letter in game["failed_guesses"] or letter in game["word_state"]: #Already have that
+            game["status"] = "duplicate"
+        elif letter in game["word"]:
+            [game["word_state"].pop(i) and game["word_state"].insert(i, letter)
+             for i in range(len(game["word"])) if game["word"][i] == letter]
+            if "_" in game["word_state"]:
+                game["status"] = "correct"
+            else:
+                game["status"] = "over-success"
+        else:
+            if len(game["failed_guesses"]) == self.MAX_TRIES:
+                game["status"] = "over-failed"
+            else:
+                game["status"] = "failed"
+            game["failed_guesses"].append(letter)
+        self.db.games.save(game)
+        return game
 
 app = Flask(__name__)
 game_service = GameService()
@@ -81,7 +80,7 @@ def main():
 
 @app.route("/join/<channel>")
 def join(channel):
-    letters = [letter for letter in ascii_uppercase]# + ['Å', 'Ä', 'Ö']
+    letters = [letter for letter in ascii_uppercase]
     print letters
     return render_template("join.html", channel_id=channel, letters=letters)
 

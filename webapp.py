@@ -84,7 +84,7 @@ def join(channel):
     print letters
     return render_template("join.html", channel_id=channel, letters=letters)
 
-#TODO: dry up and use the built in json capabilities from Flask
+#TODO: dry up
 
 @app.route("/api/game/create/<word>")
 def create_game(word):

@@ -21,3 +21,7 @@ form#create {
     margin: 0 auto;
     text-align: center;
 }
+
+#create-textbox {
+	text-transform: uppercase;	
+}

@@ -7,7 +7,7 @@ function Subscription(eventHandlers) {
             cache: 'false',
             success: function(data) {
                 switch(data.status) {
-                    case "over-succefss":
+                    case "over-success":
                         handlers.overSuccess(data);
                         break;
                     case "over-failed":
@@ -51,8 +51,8 @@ function EventHandler(hangman, statusContainer, wordStateContainer, observer) {
     
     this.handlers = {
         overSuccess: function(data) {
-        statCont.html("<div>Correct! The man lives.</div>");
-        wordCont.html(stringFromList(data.word_state));
+        	statCont.html("<div>Correct! The man lives.</div>");
+        	wordCont.html(stringFromList(data.word_state));
             obs(data);
         },
         overFailed: function(data) {

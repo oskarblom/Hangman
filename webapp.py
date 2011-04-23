@@ -80,7 +80,7 @@ def main():
 
 @app.route("/join/<channel>")
 def join(channel):
-    letters = [letter for letter in ascii_uppercase]
+    letters = [letter for letter in ascii_uppercase] + [u'Å', u'Ä', u'Ö']
     print letters
     return render_template("join.html", channel_id=channel, letters=letters)
 
@@ -88,7 +88,7 @@ def join(channel):
 
 @app.route("/api/game/create/<word>")
 def create_game(word):
-    data = game_service.create_game(unicode(str(word)).upper())
+    data = game_service.create_game(unicode(word).upper())
     response = {
         "status": "OK",
         "opponent_url" : "/join/" + data["channel"],
@@ -104,12 +104,13 @@ def join_game(channel):
 
 @app.route("/api/game/guess/<channel>/<letter>")
 def guess(channel, letter):
-    data = game_service.guess(str(channel), str(letter))
+    data = game_service.guess(str(channel), unicode(letter).upper())
     publish_event(data["channel"], data)
     return ""
 
 @app.route("/api/game/info/<channel>")
 def game_info(channel):
+    game_service.get_info()
     data = game_service.get_info(str(channel))
     publish_event(data["channel"], data)
     return ""

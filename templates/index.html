@@ -1,28 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
+
 <a href="#" id="start-game">Click to start a new game!</a>
 <form id="create">
     <label for="create-textbox">Word:</label>
     <input type="text" id="create-textbox"></input>
     <input type="submit" id="create-button" value="Create game"></input>
 </form>
-    <script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function() {
             $("#create").submit(function(ev) {
                 ev.preventDefault();
                 var word = $("#create-textbox").val();
                 if(word != "" && word.match(/^[A-Za-zÅÄÖåäö]+$/)) {
-                    $.getJSON('/api/game/create/' + word, function(data) {
+                    $.post('/api/game/create/' + word, function(data) {
                         $("#create").remove();
-                        $('#status').html("<p>Stay at this page and send this link to your opponent:</p><span>http://" + window.location.hostname + data.opponent_url+"</span>");
-                        var hMan = new Hangman(document.getElementById("holder"));
-                        var handler = new EventHandler(
-                            hMan, $('div#status'),
-                            $('div#word-state'),
-                            function() {}
-                        );
-                        var sub = new Subscription(handler.handlers);
-                        sub.subscribe(data.subscription_url);
+                        $('#status').html("<p>Stay at this page and send this link to your opponent:</p><span>http://" + window.location.hostname + "/join/" + data.channel + "</span>");
                     });
                 } else {
                     alert("Enter a word with characters between a-z");

@@ -1,31 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<script type="text/javascript">
-    $(document).ready(function() {
-        var hMan = new Hangman(document.getElementById("holder"));
-        var handler = new EventHandler(hMan, $('div#status'), $('div#word-state'), function(data) {
-            switch(data.status) {
-                case "over-success":
-                case "over-failed":
-                    $('#letters').remove();
-                    break;
-            }
-        });
-        var sub = new Subscription(handler.handlers);
-        setTimeout(function(){
-            sub.subscribe('/subscribe?id={{channel_id}}');
-            $.getJSON('/api/game/join/{{channel_id}}', function(data) {
-                $('[class^="letter"]').click(function(ev){
-                    letterElem = $(this);
-                    ev.preventDefault();
-                    $.getJSON('/api/game/guess/{{channel_id}}/' + letterElem.html(), function(){
-                        //letterElem.remove();
-                    });
-                });
-            });
-        }, 500);
-    });
-</script>
 <div id="letters">
 {% for letter in letters %}
     <span><a href="" id="letter-{{letter}}" class="letter">{{letter}}</a></span>

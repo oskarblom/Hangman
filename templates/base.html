@@ -2,34 +2,29 @@
     <head>
         {% block head %}
         <link href="/static/css/hangman.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="/static/js/jquery-1.5.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.min.js"></script>
         <script type="text/javascript" src="/static/js/raphael-min.js"></script>
-        <script type="text/javascript" src="/static/js/subscribe.js"></script>
+        <script type="text/javascript" src="/static/js/juggernaut.js"></script>
         <script type="text/javascript" src="/static/js/hangman.js"></script>
         {% endblock %}
         <title>{% block title %} hangman.se {% endblock %}</title>
         <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-21702980-1']);
-        _gaq.push(['_trackPageview']);
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-21702980-1']);
+            _gaq.push(['_trackPageview']);
 
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
         </script>
     </head>
 
     <body>
         <div id="container">
-            <div id="status" class="status-container">
-            </div>
-            <div id="word-state" class="status-container">
-            </div>
-            <div id="holder">
-            </div>
-        {% block content %} {% endblock %}
+            <div id="status" class="status-container"></div>
+            {% block content %} {% endblock %}
         </div>
     <body>
 </html>

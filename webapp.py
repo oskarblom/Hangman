@@ -37,8 +37,7 @@ def join(channel):
 @app.route("/api/game/create/<word>", methods=["POST"])
 def create_game(word):
     game = con.HangmanGame()
-    game.word = word
-    game.channel = unicode(hashlib.md5(word + str(time.time())).hexdigest())
+    game.create(word)
     game.save()
     return jsonify({"channel": game.channel})
 

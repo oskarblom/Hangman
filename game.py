@@ -1,3 +1,5 @@
+import time
+import hashlib
 import re
 from mongokit import Document
 
@@ -29,8 +31,11 @@ class HangmanGame(Document):
 
     def create(self, word):
         self.word = word.upper()
-        self.wordstate = ["_"] * len(word)
-        self.state = GameState.CREATED
+        self.channel = unicode(hashlib.md5(word + str(time.time())).hexdigest())
+        self.wordstate = [u"_"] * len(word)
+
+    def join(self):
+        self.state = GameState.RUNNING
 
     def guess(self, letter):
         upper_letter = letter.upper()
@@ -49,4 +54,3 @@ class HangmanGame(Document):
                 self.state = GameState.CORRECT_GUESS
             else:
                 self.state = GameState.OVER_SAVED
-

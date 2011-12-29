@@ -14,6 +14,9 @@ class TestGame(unittest.TestCase):
     def test_create_sets_word(self):
         self.assertEqual(self.game.word, self.word)
 
+    def test_create_sets_channel(self):
+        self.assertIsNot(self.game.channel, None)
+
     def test_create_sets_wordstate(self):
         self.assertEqual(self.game.wordstate, ["_", "_", "_", "_", "_", "_"])
 
@@ -37,10 +40,18 @@ class TestGame(unittest.TestCase):
         [self.game.guess(x) for x in ["F", "O", "O", "B", "A", "R"]]
         self.assertEqual(self.game.state, GameState.OVER_SAVED)
 
+    def test_save_sets_wordstate(self):
+        guesses = ["F", "O", "O", "B", "A", "R"]
+        [self.game.guess(x) for x in guesses]
+        self.assertEqual(self.game.wordstate, guesses)
+
     def test_hang_sets_state(self):
         [self.game.guess(x) for x in ["C", "D", "E", "G", "H", "I", "J", "K", "L", "M"]]
         self.assertEqual(self.game.state, GameState.OVER_HUNG)
 
+    def test_join_sets_state(self):
+        self.game.join()
+        self.assertEqual(self.game.state, GameState.RUNNING)
 
 if __name__ == "__main__":
     unittest.main()

@@ -10,14 +10,12 @@ from game import *
 from mongokit import Connection
 
 
-def publish_event(channel, data):
-    urllib2.urlopen(EVENT_URL + "?id=%s" % channel,
-                    json.dumps(data, default=json_util.default))
-
 app = Flask(__name__)
 con = Connection()
+jug = Juggernaut()
 
-# Regular routes
+def publish_event(channel, game):
+    jug.publish(game.channel, game.to_json())
 
 @app.route("/test")
 def test():
@@ -50,13 +48,6 @@ def join_game(channel):
 @app.route("/api/game/guess/<channel>/<letter>")
 def guess(channel, letter):
     data = game_service.guess(str(channel), unicode(letter).upper())
-    publish_event(data["channel"], data)
-    return ""
-
-@app.route("/api/game/info/<channel>")
-def game_info(channel):
-    game_service.get_info()
-    data = game_service.get_info(str(channel))
     publish_event(data["channel"], data)
     return ""
 

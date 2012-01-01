@@ -2,15 +2,11 @@
     <head>
         <script type="text/javascript" src="static/js/jquery.min.js"></script>
         <script type="text/javascript" src="static/js/juggernaut.js"></script>
+        <script type="text/javascript" src="static/js/game.js"></script>
     </head>
     <body>
         <script type="text/javascript" charset="utf-8">
-            $(document).ready(function() {
-                var jug = new Juggernaut;
-                jug.subscribe("/channel", function(data) {
-                    console.log(data);
-                });
-            });
+            GameEvents.listen("/test", {});
         </script>
     </body>
 </html>

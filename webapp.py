@@ -5,10 +5,9 @@ import time
 import hashlib
 import json
 import urllib2
-import juggernaut
+from juggernaut import Juggernaut
 from game import *
 from mongokit import Connection
-
 
 app = Flask(__name__)
 con = Connection()

@@ -1,30 +1,15 @@
 {% extends "base.html" %}
-{% block content %}
+{% block head %}
+<script type="text/javascript" src="/static/js/host.js"></script>
+{% endblock %}
 
-<a href="#" id="start-game">Click to start a new game!</a>
+{% block content %}
 <form id="create">
-    <label for="create-textbox">Word:</label>
-    <input type="text" id="create-textbox"></input>
-    <input type="submit" id="create-button" value="Create game"></input>
+    <p>
+    <input type="text" id="create-textbox" placeholder="Skriv ord"></input>
+    </p>
+    <p>
+    <input type="submit" id="create-button" value="Börja spela!"></input>
+    </p>
 </form>
-<script type="text/javascript">
-        $(document).ready(function() {
-            $("#create").submit(function(ev) {
-                ev.preventDefault();
-                var word = $("#create-textbox").val();
-                if(word != "" && word.match(/^[A-Za-zÅÄÖåäö]+$/)) {
-                    $.post('/api/game/create/' + word, function(data) {
-                        $("#create").remove();
-                        $('#status').html("<p>Stay at this page and send this link to your opponent:</p><span>http://" + window.location.hostname + "/join/" + data.channel + "</span>");
-                    });
-                } else {
-                    alert("Enter a word with characters between a-z");
-                }
-            });
-            $("#start-game").click(function(ev) {
-                $("#create").show();
-                $(this).remove();
-            });
-        });
-    </script>
 {% endblock %}

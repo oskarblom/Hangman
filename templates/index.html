@@ -4,12 +4,17 @@
 {% endblock %}
 
 {% block content %}
+<div id="info-box">
+    <h3>Välkommen till hangman.se</h3>
+    <p>Här kan du spela hänga gubbe online mot en kompis. Skriv in det ord
+    som din kompis ska gissa på i rutan och klicka på knappen!</p>
+</div>
 <form id="create">
     <p>
-    <input type="text" id="create-textbox" placeholder="Skriv ord"></input>
+    <input type="text" id="create-textbox" placeholder="Skriv ord">
     </p>
     <p>
-    <input type="submit" id="create-button" value="Börja spela!"></input>
+    <input type="submit" id="create-button" value="Börja spela!">
     </p>
 </form>
 {% endblock %}

@@ -7,7 +7,12 @@
                 var validationMessage = $("#validation-message");
                 validationMessage.html("Ordet får bara bestå av bokstäver");
                 validationMessage.show();
-            }
+                return;
+            } 
+            window.hm = new Hangman(document.getElementById("hangman-canvas"));
+            $.post("/game/create/" + word, function(data) {
+                console.log(data);
+            }, "json");
         });
     });
 })(jQuery);

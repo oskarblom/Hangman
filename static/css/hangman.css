@@ -69,7 +69,6 @@ body {
     width: 960px;
     margin: 0 auto;
     text-align: center;
-    padding-top: 200px;
 }
 
 #validation-container {
@@ -100,3 +99,8 @@ body {
     box-shadow: 10px 10px 5px #888;
 }
 
+#hangman-canvas {
+    height: 150px;
+    width: 300px;
+    margin: inherit;
+}

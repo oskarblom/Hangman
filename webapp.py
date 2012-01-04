@@ -31,20 +31,20 @@ def join(channel):
     return render_template("join.html", channel_id=channel, letters=letters)
 
 # API routes
-@app.route("/api/game/create/<word>", methods=["POST"])
+@app.route("/game/create/<word>", methods=["POST"])
 def create_game(word):
     game = con.HangmanGame()
     game.create(word)
     game.save()
     return jsonify({"channel": game.channel})
 
-@app.route("/api/game/join/<channel>")
+@app.route("/game/join/<channel>", methods=["POST"])
 def join_game(channel):
     data = game_service.add_player_to_game(str(channel))
     publish_event(data["channel"], data)
     return ""
 
-@app.route("/api/game/guess/<channel>/<letter>")
+@app.route("/game/guess/<channel>/<letter>", methods=["POST"])
 def guess(channel, letter):
     data = game_service.guess(str(channel), unicode(letter).upper())
     publish_event(data["channel"], data)

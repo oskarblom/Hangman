@@ -1,7 +1,5 @@
 env/
 *.swp
-notes
-.project
-.pydevproject
-.settings/
 *.pyc
+*.vim
+notes

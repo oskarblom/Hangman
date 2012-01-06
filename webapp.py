@@ -27,7 +27,6 @@ def main():
 @app.route("/join/<channel>")
 def join(channel):
     letters = [letter for letter in ascii_uppercase] + [u'Å', u'Ä', u'Ö']
-    print letters
     return render_template("join.html", channel_id=channel, letters=letters)
 
 # API routes

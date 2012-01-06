@@ -1,5 +1,5 @@
 # coding:utf-8
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, g
 from string import ascii_uppercase
 import time
 import hashlib
@@ -10,11 +10,12 @@ from game import *
 from mongokit import Connection
 
 app = Flask(__name__)
+
+# Should be thread safe according to docs
 con = Connection()
-jug = Juggernaut()
 
 def publish_event(channel, game):
-    jug.publish(game.channel, game.to_json())
+    Juggernaut().publish(game.channel, game.to_json())
 
 @app.route("/test")
 def test():

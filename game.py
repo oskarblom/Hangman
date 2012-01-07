@@ -6,6 +6,7 @@ from mongokit import Document
 class GameState(object):
     CREATED = u"CREATED"
     RUNNING = u"RUNNING"
+    CORRECT_GUESS = u"CORRECT_GUESS"
     INCORRECT_GUESS = u"INCORRECT_GUESS"
     OVER_SAVED = u"OVER_SAVED"
     OVER_HUNG = u"OVER_HUNG"

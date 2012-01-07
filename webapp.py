@@ -14,7 +14,7 @@ app = Flask(__name__)
 # Should be thread safe according to docs
 con = Connection()
 
-def publish_event(channel, game):
+def publish_event(game):
     Juggernaut().publish(game.channel, game.to_json())
 
 @app.route("/test")
@@ -40,8 +40,10 @@ def create_game(word):
 
 @app.route("/game/join/<channel>", methods=["POST"])
 def join_game(channel):
-    data = game_service.add_player_to_game(str(channel))
-    publish_event(data["channel"], data)
+    game = con.HangmanGame.find_one({"channel": unicode(channel)})
+    game.join()
+    game.save()
+    publish_event(game)
     return ""
 
 @app.route("/game/guess/<channel>/<letter>", methods=["POST"])

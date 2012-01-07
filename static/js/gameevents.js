@@ -1,11 +1,11 @@
-var GameEvents = (function() {
+var gameEvents = (function() {
     var Game = function(eventHandler) {
         this.handler = eventHandler;
         this.jug = new Juggernaut;
     };
     Game.prototype.subscribe = function(channel) {
-        this.jug.subscribe(channel,  function(data) {
-            console.log("data"); 
+        this.jug.subscribe(channel, function(data) {
+            console.log(data); 
         });
     };
     return {

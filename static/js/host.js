@@ -1,4 +1,13 @@
 (function($) {
+
+    eventHandler = {
+        onCreated : function () { },
+        onRunning : function () { },
+        onIncorrectGuess : function () { },
+        onOverSaved : function () { },
+        onOverHung : function () { }
+    }
+
     $(document).ready(function() {
         $("#create-button").click(function() {
             event.preventDefault();
@@ -11,7 +20,8 @@
             } 
             window.hm = new Hangman(document.getElementById("hangman-canvas"));
             $.post("/game/create/" + word, function(data) {
-                console.log(data);
+                console.log(data.channel);
+                gameEvents.listen(data.channel, eventHandler);
             }, "json");
         });
     });

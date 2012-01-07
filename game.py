@@ -4,12 +4,11 @@ import re
 from mongokit import Document
 
 class GameState(object):
-    CREATED = 0
-    RUNNING = 1
-    CORRECT_GUESS = 2
-    INCORRECT_GUESS = 3
-    OVER_SAVED = 4
-    OVER_HUNG = 5
+    CREATED = u"CREATED"
+    RUNNING = u"RUNNING"
+    INCORRECT_GUESS = u"INCORRECT_GUESS"
+    OVER_SAVED = u"OVER_SAVED"
+    OVER_HUNG = u"OVER_HUNG"
 
 class AlreadyGuessedException(Exception):
     pass
@@ -21,7 +20,7 @@ class HangmanGame(Document):
     __database__ = "hangman"
     structure = {
         "channel": unicode,
-        "state": int,
+        "state": unicode,
         "word": unicode,
         "wordstate": [unicode],
         "failed": [unicode]

@@ -48,8 +48,10 @@ def join_game(channel):
 
 @app.route("/game/guess/<channel>/<letter>", methods=["POST"])
 def guess(channel, letter):
-    data = game_service.guess(str(channel), unicode(letter).upper())
-    publish_event(data["channel"], data)
+    game = con.HangmanGame.find_one({"channel": unicode(channel)})
+    game.guess(letter)
+    game.save()
+    publish_event(game)
     return ""
 
 if __name__ == "__main__":

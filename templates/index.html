@@ -3,12 +3,15 @@
 <script type="text/javascript" src="/static/js/host.js"></script>
 {% endblock %}
 
-{% block content %}
+{% block left %}
 <div id="info-box">
     <h3>Välkommen till hangman.se</h3>
     <p>Här kan du spela hänga gubbe online mot en kompis. Skriv in det ord
     som din kompis ska gissa på i rutan och klicka på knappen!</p>
 </div>
+{% endblock %}
+
+{% block center %}
 <div id="hangman-canvas"></div>
 <form id="create">
     <div id="validation-container">

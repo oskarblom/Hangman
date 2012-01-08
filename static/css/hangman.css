@@ -65,10 +65,25 @@ body {
     box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4); 
 }
 
-#content {
+#container {
     width: 960px;
-    margin: 0 auto;
-    text-align: center;
+    margin: 20px auto;
+}
+
+#column-left {
+    float: left;
+    width: 320px;
+}
+
+#column-center {
+    float: left;
+    text-align: center
+    width: 320px;
+}
+
+#column-right {
+    float: left
+    width: 320px;
 }
 
 #validation-container {
@@ -88,12 +103,19 @@ body {
     font-size: 26px;
 }
 
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
 #info-box {
+    text-align: center;
     background-color: #dbecfc;
-    width: 300px;
-    position: absolute;
-    top: 50px;
-    left: 50px;
+    width: 290px;
+    padding: 4px;
     -moz-box-shadow: 10px 10px 5px #888;
     -webkit-box-shadow: 10px 10px 5px #888;
     box-shadow: 10px 10px 5px #888;

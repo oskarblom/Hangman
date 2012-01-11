@@ -4,7 +4,7 @@ var gameEvents = (function() {
         this.jug = new Juggernaut;
     };
     Game.prototype.subscribe = function(channel) {
-        hangman = new Hangman(document.getElementById("hangman-canvas"));
+        window.hangman = new Hangman(document.getElementById("hangman-canvas"));
         this.jug.subscribe(channel, function(data) {
             gameEvent = eval(data);
             console.log(gameEvent); 
@@ -14,7 +14,7 @@ var gameEvents = (function() {
                 case "CORRECT_GUESS":
                     break;
                 case "INCORRECT_GUESS":
-                    hangman.drawNextPart();
+                    window.hangman.drawNextPart();
                     break;
                 case "OVER_SAVED":
                     break;

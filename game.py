@@ -24,7 +24,8 @@ class HangmanGame(Document):
         "state": unicode,
         "word": unicode,
         "wordstate": [unicode],
-        "failed": [unicode]
+        "failed": [unicode],
+        "last_guess": unicode
     }
     default_values = { "state": GameState.CREATED }
     use_dot_notation = True
@@ -41,6 +42,7 @@ class HangmanGame(Document):
         upper_letter = letter.upper()
         if upper_letter in self.failed:
             raise AlreadyGuessedException()
+        self.last_guess = upper_letter
         if upper_letter not in self.word:
             self.failed.append(upper_letter)
             if len(self.failed) == MAX_INCORRECT_GUESSES:

@@ -53,5 +53,18 @@ class TestGame(unittest.TestCase):
         self.game.join()
         self.assertEqual(self.game.state, GameState.RUNNING)
 
+    def test_new_game_has_no_state(self):
+        self.assertEqual(self.game.last_guess, None)
+
+    def test_correct_guess_sets_last_guess(self):
+        letter = "F"
+        self.game.guess(letter)
+        self.assertEqual(self.game.last_guess, letter)
+
+    def test_incorrect_guess_sets_last_guess(self):
+        letter = "C"
+        self.game.guess(letter)
+        self.assertEqual(self.game.last_guess, letter)
+
 if __name__ == "__main__":
     unittest.main()

@@ -6,14 +6,15 @@ var gameEvents = (function() {
     Game.prototype.subscribe = function(channel) {
         window.hangman = new Hangman(document.getElementById("hangman-canvas"));
         this.jug.subscribe(channel, function(data) {
-            gameEvent = eval(data);
-            console.log(gameEvent); 
-            switch (gameEvent.state) {
+            console.log(data);
+            game = JSON.parse(data);
+            switch (game.state) {
                 case "RUNNING":
                     break;
                 case "CORRECT_GUESS":
                     break;
                 case "INCORRECT_GUESS":
+                    console.log("incorrect guess event");
                     window.hangman.drawNextPart();
                     break;
                 case "OVER_SAVED":

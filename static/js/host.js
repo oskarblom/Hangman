@@ -18,10 +18,11 @@
                 validationMessage.show();
                 return;
             } 
-            window.hm = new Hangman(document.getElementById("hangman-canvas"));
             $.post("/game/create/" + word, function(data) {
                 console.log(data.channel);
+                $("#column-center").prepend("<p>" + word.toUpperCase() + "</p>");
                 gameEvents.listen(data.channel, eventHandler);
+                $("#create").remove();
             }, "json");
         });
     });

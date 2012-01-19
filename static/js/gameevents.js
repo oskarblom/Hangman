@@ -5,11 +5,13 @@ var gameEvents = (function() {
     };
     Game.prototype.subscribe = function(channel) {
         window.hangman = new Hangman(document.getElementById("hangman-canvas"));
+        var self = this;
         this.jug.subscribe(channel, function(data) {
             console.log(data);
             game = JSON.parse(data);
             switch (game.state) {
                 case "RUNNING":
+                    self.handler.onRunning(game);
                     break;
                 case "CORRECT_GUESS":
                     break;

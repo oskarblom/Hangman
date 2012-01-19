@@ -1,11 +1,13 @@
 (function($) {
 
     eventHandler = {
-        onCreated : function () { },
-        onRunning : function () { },
-        onIncorrectGuess : function () { },
-        onOverSaved : function () { },
-        onOverHung : function () { }
+        onRunning : function (game) {
+            $("#info-box").html("<img src='static/img/green.png'></img>");
+        },
+        onCorrectGuess : function (game) { },
+        onIncorrectGuess : function (game) { },
+        onOverSaved : function (game) { },
+        onOverHung : function (game) { }
     }
 
     $(document).ready(function() {
@@ -23,6 +25,7 @@
                 $("#column-center").prepend("<p>" + word.toUpperCase() + "</p>");
                 gameEvents.listen(data.channel, eventHandler);
                 $("#create").remove();
+                $("#info-box").html("<img src='static/img/red.png'></img>");
             }, "json");
         });
     });

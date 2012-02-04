@@ -2,7 +2,10 @@
 
     eventHandler = {
         onRunning : function (game) {
-            $("#info-box").html("<img src='static/img/green.png'></img>");
+            $("#info-box").html(
+                "<img src='static/img/green.png' id='status-indicator'></img>"+
+                "<p>Motspelare ansluten</p>"
+            );
         },
         onCorrectGuess : function (game) { },
         onIncorrectGuess : function (game) { },
@@ -25,7 +28,10 @@
                 $("#column-center").prepend("<p>" + word.toUpperCase() + "</p>");
                 gameEvents.listen(data.channel, eventHandler);
                 $("#create").remove();
-                $("#info-box").html("<img src='static/img/red.png'></img>");
+                $("#info-box").html(
+                    "<img src='static/img/red.png' id='status-indicator'></img>" +
+                    "<p>Motspelare ej ansluten</p>"
+                );
             }, "json");
         });
     });

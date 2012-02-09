@@ -1,12 +1,7 @@
 (function($) {
 
     eventHandler = {
-        onRunning : function (game) {
-            $("#info-box").html(
-                "<img src='static/img/green.png' id='status-indicator'></img>"+
-                "<p>Motspelare ansluten</p>"
-            );
-        },
+        onRunning : function (game) { },
         onCorrectGuess : function (game) { },
         onIncorrectGuess : function (game) { },
         onOverSaved : function (game) { },
@@ -30,7 +25,7 @@
                 $("#create").remove();
                 $("#info-box").html(
                     "<img src='static/img/red.png' id='status-indicator'></img>" +
-                    "<p>Motspelare ej ansluten</p>"
+                    "<p>Väntar på att motspelare</p>"
                 );
             }, "json");
         });

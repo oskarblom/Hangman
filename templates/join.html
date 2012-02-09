@@ -1,8 +1,21 @@
 {% extends "base.html" %}
-{% block content %}
+
+{% block head %}
+    <script type="text/javascript" src="/static/js/guest.js"></script>
+{% endblock %}
+
+{% block left %}
+<p>test left</p>
+{% endblock %}
+
+{% block center %}
 <div id="letters">
 {% for letter in letters %}
     <span><a href="" id="letter-{{letter}}" class="letter">{{letter}}</a></span>
 {% endfor %}
 </div>
+{% endblock %}
+
+{% block right %}
+<p>test right</p>
 {% endblock %}

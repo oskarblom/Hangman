@@ -11,6 +11,10 @@ var gameEvents = (function() {
             game = JSON.parse(data);
             switch (game.state) {
                 case "RUNNING":
+                    $("#info-box").html(
+                        "<img src='static/img/green.png' id='status-indicator'></img>" +
+                        "<p>Motspelare ansluten</p>"
+                    );
                     self.handler.onRunning(game);
                     break;
                 case "CORRECT_GUESS":

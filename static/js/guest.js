@@ -8,6 +8,9 @@
     }
 
     var eventHandler = {
+        onConnect: function() {
+            $.post("/game/join/" + channel);
+        },
         onRunning : function (game) { },
         onCorrectGuess : function (game) { },
         onIncorrectGuess : function (game) { },
@@ -19,9 +22,8 @@
         var channel = getGameChannel();
         console.log("got game channel: " + channel);
         gameEvents.listen(channel, eventHandler);
-        setTimeout(function() {
-            $.post("/game/join/" + channel, function() {});
-        }, 300);
+        //TODO: expose connected event from the event dispatch instead
+        //setTimeout(function() { $.post("/game/join/" + channel, function() {}); }, 1000);
     });
 
 })(jQuery);

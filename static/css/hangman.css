@@ -82,7 +82,7 @@ body {
 }
 
 #column-right {
-    float: left
+    float: left;
     width: 320px;
 }
 

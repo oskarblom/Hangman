@@ -17,9 +17,13 @@ con = Connection()
 def publish_event(game):
     Juggernaut().publish(game.channel, game.to_json())
 
-@app.route("/test")
-def test():
-    return render_template("test.html")
+@app.route("/testhost")
+def test_host():
+    return render_template("testhost.html")
+
+@app.route("/testguest")
+def test_guest():
+    return render_template("testguest.html")
 
 @app.route("/")
 def main():
@@ -31,6 +35,11 @@ def join(channel):
     return render_template("join.html", channel_id=channel, letters=letters)
 
 # API routes
+@app.route("/game/test", methods=["POST"])
+def test_game():
+    Juggernaut().publish("abc", "oskar");
+    return ""
+
 @app.route("/game/create/<word>", methods=["POST"])
 def create_game(word):
     game = con.HangmanGame()

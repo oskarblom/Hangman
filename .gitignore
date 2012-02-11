@@ -3,3 +3,4 @@ env/
 *.pyc
 *.vim
 notes
+tags

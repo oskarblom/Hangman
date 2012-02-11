@@ -1,27 +1,24 @@
-var gameEvents = (function() {
-    var Game = function(eventHandler) {
-        this.handler = eventHandler;
-        this.jug = new Juggernaut;
-    };
-    Game.prototype.subscribe = function(channel) {
-        window.hangman = new Hangman(document.getElementById("hangman-canvas"));
-        var self = this;
-        this.jug.subscribe(channel, function(data) {
+var gameEvents = (function($) {
+    var jug = new Juggernaut();
+    var subscribe = function(channel, handler) {
+        var hangman = new Hangman(document.getElementById("hangman-canvas"));
+        jug.subscribe(channel, function(data) {
+            console.log("got event");
             console.log(data);
             game = JSON.parse(data);
             switch (game.state) {
                 case "RUNNING":
                     $("#info-box").html(
-                        "<img src='static/img/green.png' id='status-indicator'></img>" +
+                        "<img src='/static/img/green.png' id='status-indicator'></img>" +
                         "<p>Motspelare ansluten</p>"
                     );
-                    self.handler.onRunning(game);
+                    handler.onRunning(game);
                     break;
                 case "CORRECT_GUESS":
                     break;
                 case "INCORRECT_GUESS":
                     console.log("incorrect guess event");
-                    window.hangman.drawNextPart();
+                    hangman.drawNextPart();
                     break;
                 case "OVER_SAVED":
                     break;
@@ -32,10 +29,6 @@ var gameEvents = (function() {
             }
         });
     };
-    return {
-        "listen" : function(channel, eventHandler) {
-            new Game(eventHandler).subscribe(channel);
-        }
-    }
-}());
+    return { "listen" : subscribe }
+})(jQuery);
 

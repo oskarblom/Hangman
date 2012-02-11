@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/js/juggernaut.js"></script>
+    </head>
+    <body>
+        <div id="hangman-canvas"></div>
+        <script type="text/javascript" charset="utf-8">
+            var eventHandler = {
+                onRunning : function (game) { },
+                onCorrectGuess : function (game) { },
+                onIncorrectGuess : function (game) { },
+                onOverSaved : function (game) { },
+                onOverHung : function (game) { }
+            }
+
+            //gameEvents.listen("abc", eventHandler)
+            var j = new Juggernaut;
+            j.subscribe("abc", function(d) {console.log(d)});
+            setTimeout(function() {
+            $.post("/game/test");
+            }, 300);
+        </script>
+    </body>
+</html>
+

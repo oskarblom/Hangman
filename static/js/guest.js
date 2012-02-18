@@ -1,5 +1,7 @@
 (function($) {
 
+    var currentChannel;
+
     function getGameChannel() {
         var uri = document.baseURI.split("/");
         if(uri.length > 0 && uri.length === 5) {
@@ -9,7 +11,8 @@
 
     var eventHandler = {
         onConnect: function() {
-            $.post("/game/join/" + channel);
+            console.log("guest connected");
+            $.post("/game/join/" + currentChannel);
         },
         onRunning : function (game) { },
         onCorrectGuess : function (game) { },
@@ -19,11 +22,8 @@
     }
 
     $(document).ready(function() {
-        var channel = getGameChannel();
-        console.log("got game channel: " + channel);
-        gameEvents.listen(channel, eventHandler);
-        //TODO: expose connected event from the event dispatch instead
-        //setTimeout(function() { $.post("/game/join/" + channel, function() {}); }, 1000);
+        currentChannel = getGameChannel();
+        gameEvents.listen(currentChannel, eventHandler);
     });
 
 })(jQuery);

@@ -1,12 +1,15 @@
 var gameEvents = (function($) {
-    var jug = new Juggernaut();
+
     var subscribe = function(channel, handler) {
         var hangman = new Hangman(document.getElementById("hangman-canvas"));
+        var jug = new Juggernaut();
+
         if(handler.onConnect !== undefined) {
             jug.on("connect", function() {
                 handler.onConnect();
             });
         }
+
         jug.subscribe(channel, function(data) {
             console.log("got event");
             console.log(data);

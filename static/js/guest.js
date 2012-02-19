@@ -1,6 +1,7 @@
 (function($) {
 
     var currentChannel;
+    var currentLetter;
 
     function getGameChannel() {
         var uri = document.baseURI.split("/");
@@ -11,10 +12,17 @@
 
     var eventHandler = {
         onConnect: function() {
-            console.log("guest connected");
             $.post("/game/join/" + currentChannel);
         },
-        onRunning : function (game) { },
+        onRunning : function (game) { 
+            $("#letters").show();
+            $(".letter").click(function(event) {
+                event.preventDefault();
+                currentLetter = $(this).html();
+                $(this).parent().html(currentLetter);
+                $.post("/game/guess/" + currentChannel + "/" + currentLetter);
+            });
+        },
         onCorrectGuess : function (game) { },
         onIncorrectGuess : function (game) { },
         onOverSaved : function (game) { },

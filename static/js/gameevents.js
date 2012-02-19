@@ -13,7 +13,9 @@ var gameEvents = (function($) {
         jug.subscribe(channel, function(data) {
             console.log("got event");
             console.log(data);
+
             game = JSON.parse(data);
+
             switch (game.state) {
                 case "RUNNING":
                     $("#info-box").html(

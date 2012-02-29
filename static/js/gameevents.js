@@ -2,7 +2,7 @@ var gameEvents = (function($) {
 
     var subscribe = function(channel, handler) {
         var hangman = new Hangman(document.getElementById("hangman-canvas"));
-        var jug = new Juggernaut();
+        var jug = new Juggernaut;
 
         if(handler.onConnect !== undefined) {
             jug.on("connect", function() {
@@ -11,9 +11,7 @@ var gameEvents = (function($) {
         }
 
         jug.subscribe(channel, function(data) {
-            console.log("got event");
-            console.log(data);
-
+            console.log("got event", data);
             game = JSON.parse(data);
 
             switch (game.state) {

@@ -12,13 +12,16 @@
 {% endblock %}
 
 {% block center %}
+{% endblock %}
+
+{% block right %}
+<p>test right</p>
+{% endblock %}
+
+{% block bottom %}
 <div id="letters">
 {% for letter in letters %}
     <span><a href="" class="letter">{{letter}}</a></span>
 {% endfor %}
 </div>
-{% endblock %}
-
-{% block right %}
-<p>test right</p>
 {% endblock %}

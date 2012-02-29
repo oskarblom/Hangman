@@ -28,7 +28,7 @@
                 gameEvents.listen(data.channel, eventHandler);
                 $("#create").remove();
                 $("#info-box").html(
-                    "<img src='/static/img/red.png' id='status-indicator'></img>" +
+                    "<img src='/static/img/waiting.gif' id='status-indicator'></img>" +
                     "<p>Väntar på att motspelare ska ansluta</p>"
                 );
             }, "json");

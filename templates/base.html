@@ -24,7 +24,7 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
         </script>
-        <div id="container" class="clearfix">
+        <div class="container clearfix">
             <div id="column-left">
                 {% block left %} {% endblock %}
             </div>
@@ -34,9 +34,13 @@
                 {% block center %} {% endblock %}
             </div>
             <div id="column-right">
-                Content
+                This is right column content
                 {% block right %} {% endblock %}
             </div>
+        </div>
+        <div class="container" id="bottom">
+            This is bottom content
+            {% block bottom %} {% endblock %}
         </div>
     </body>
 </html>

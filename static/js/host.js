@@ -11,7 +11,7 @@
 
     $(document).ready(function() {
 
-        $("#create-button").click(function() {
+        $("#create").submit(function() {
             event.preventDefault();
             word = $("#create-textbox").val();
 
@@ -24,7 +24,7 @@
             
             $.post("/game/create/" + word, function(data) {
                 $("#column-right").html("http://localhost:5000/join/" + data.channel);
-                $("#column-center").prepend("<p>" + word.toUpperCase() + "</p>");
+                $("#column-right").prepend("<p>" + word.toUpperCase() + "</p>");
                 gameEvents.listen(data.channel, eventHandler);
                 $("#create").remove();
                 $("#info-box").html(

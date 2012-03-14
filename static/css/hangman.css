@@ -72,22 +72,18 @@ body {
 
 #column-left {
     float: left;
-    width: 320px;
-}
-
-#column-center {
-    float: left;
+    width: 480px;
     text-align: center;
-    width: 320px;
 }
 
 #column-right {
-    float: left;
-    width: 320px;
+    float: right;
+    width: 480px;
+    text-align: center;
 }
 
 #bottom {
-    
+   text-align: center; 
 }
 
 #validation-container {
@@ -105,6 +101,7 @@ body {
     text-transform: uppercase;	
     padding: 6px;
     font-size: 26px;
+    width: 264px;
 }
 
 .clearfix:after {
@@ -118,8 +115,9 @@ body {
 #info-box {
     text-align: center;
     background-color: #dbecfc;
-    width: 290px;
-    padding: 4px;
+    width: 350px;
+    padding: 16px 32px;
+    margin: 0 auto;
     -moz-box-shadow: 10px 10px 5px #888;
     -webkit-box-shadow: 10px 10px 5px #888;
     box-shadow: 10px 10px 5px #888;

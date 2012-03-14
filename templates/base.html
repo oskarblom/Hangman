@@ -27,19 +27,13 @@
         <div class="container clearfix">
             <div id="column-left">
                 {% block left %} {% endblock %}
-            </div>
-            <div id="column-center">
                 <div id="hangman-canvas"></div>
-                <div id="word-state-container"></div>
-                {% block center %} {% endblock %}
             </div>
             <div id="column-right">
-                This is right column content
                 {% block right %} {% endblock %}
             </div>
         </div>
         <div class="container" id="bottom">
-            This is bottom content
             {% block bottom %} {% endblock %}
         </div>
     </body>

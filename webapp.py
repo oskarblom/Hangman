@@ -1,10 +1,6 @@
 # coding:utf-8
-from flask import Flask, render_template, jsonify, g
+from flask import Flask, render_template, jsonify
 from string import ascii_uppercase
-import time
-import hashlib
-import json
-import urllib2
 from juggernaut import Juggernaut
 from game import *
 from mongokit import Connection

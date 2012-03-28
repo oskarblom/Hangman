@@ -9,6 +9,11 @@
         onOverHung : function (game) { }
     }
 
+    function getUrlByChannel(channel) {
+        return window.location.protocol +  "//" + 
+               window.location.host + "/join/" + channel;
+    }
+
     $(document).ready(function() {
 
         $("#column-right").on("click", "#readonly-container div", function () {
@@ -29,8 +34,8 @@
             
             $.post("/game/create/" + word, function(data) {
                 $("#column-right").html(
-                    "<div id='readonly-container'><input type='text' value='"+
-                    "http://localhost:5000/join/" + data.channel +
+                    "<div id='readonly-container'><input type='text' value='" +
+                    getUrlByChannel(data.channel) + 
                     "' readonly='readonly'/><div></div></div>"
                 );
                 $("#column-right").prepend("<p>" + word.toUpperCase() + "</p>");

@@ -32,7 +32,7 @@ class HangmanGame(Document):
 
     def create(self, word):
         self.word = word.upper()
-        self.channel = unicode(hashlib.md5(word + str(time.time())).hexdigest())
+        self.channel = unicode(hashlib.md5(word.encode("utf-8") + str(time.time())).hexdigest())
         self.wordstate = [u"_"] * len(word)
 
     def join(self):

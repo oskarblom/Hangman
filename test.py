@@ -15,7 +15,7 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game.word, self.word)
 
     def test_create_sets_channel(self):
-        self.assertIsNot(self.game.channel, None)
+        self.assertTrue(self.game.channel is not None)
 
     def test_create_sets_wordstate(self):
         self.assertEqual(self.game.wordstate, ["_", "_", "_", "_", "_", "_"])

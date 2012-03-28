@@ -11,7 +11,12 @@
 
     $(document).ready(function() {
 
-        $("#create").submit(function() {
+        $("#column-right").on("click", "#readonly-container div", function () {
+            var linkField = $(this).prev("input");
+            linkField.select();
+        });
+
+        $("#create").submit(function(event) {
             event.preventDefault();
             word = $("#create-textbox").val();
 
@@ -23,7 +28,11 @@
             } 
             
             $.post("/game/create/" + word, function(data) {
-                $("#column-right").html("http://localhost:5000/join/" + data.channel);
+                $("#column-right").html(
+                    "<div id='readonly-container'><input type='text' value='"+
+                    "http://localhost:5000/join/" + data.channel +
+                    "' readonly='readonly'/><div></div></div>"
+                );
                 $("#column-right").prepend("<p>" + word.toUpperCase() + "</p>");
                 gameEvents.listen(data.channel, eventHandler);
                 $("#create").remove();

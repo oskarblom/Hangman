@@ -10,6 +10,7 @@ p, span {
 }
 
 body {
+    padding-top: 40px;
     background-color: #b7dafc;
 }
 
@@ -126,15 +127,68 @@ body {
 #hangman-canvas {
     height: 250px;
     width: 300px;
-    margin: inherit;
+    margin-left: 180px;
 }
 
+#connection-status {
+    background-color: #dbecfc;
+    width: 220px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #666;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+#connection-status p {
+    margin: 8px 0;
+    padding: 0;
+}
+
+#connection-indicator {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin: 4px 0 0 8px;
+}
 #status-indicator {
     margin-top: 20px;
     width: 30px;
     height: 30px;
 }
 
+.letter {
+    font-size: 36px;
+}
+
+.letter a {
+    text-decoration: none;
+    color: #FF5656;
+}
+
 #letters {
     display: none;
+}
+
+#readonly-container {
+    position: relative;
+    display: inline-block;
+    width: 300px;
+    cursor: text;
+}
+
+#readonly-container input {
+    width: 300px;
+    font-size: 16px;
+}
+
+#readonly-container div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }

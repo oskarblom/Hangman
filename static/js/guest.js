@@ -16,7 +16,7 @@
         },
         onRunning : function (game) { 
             $("#letters").show();
-            $(".letter").click(function(event) {
+            $(".letter a").click(function(event) {
                 event.preventDefault();
                 currentLetter = $(this).html();
                 $(this).parent().html(currentLetter);

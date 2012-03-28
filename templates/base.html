@@ -24,6 +24,10 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
         </script>
+        <div id="connection-status">
+            <img src='/static/img/green.png' id='connection-indicator' alt="Spelare anslutna"/>
+            <p>Motspelare ansluten</p>
+        </div>
         <div class="container clearfix">
             <div id="column-left">
                 {% block left %} {% endblock %}

@@ -26,7 +26,8 @@
         });
 
         $("#create").submit(function(event) {
-css("visibility", "hidden");
+            event.preventDefault();
+            console.log("clicked");
             word = $("#create-textbox").val();
 
             if(!word.match(/^[A-Za-zÅÄÖåäö]+$/)) {

@@ -4,7 +4,7 @@
     var currentLetter;
 
     function getGameChannel() {
-        var uri = document.baseURI.split("/");
+        var url = document.URL.split("/");
         if(uri.length > 0 && uri.length === 5) {
             return uri[uri.length - 1];
         } 

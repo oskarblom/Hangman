@@ -1,5 +1,6 @@
 var gameEvents = (function($) {
 
+
     var subscribe = function(channel, handler) {
         var hangman = new Hangman(document.getElementById("hangman-canvas"));
         var jug = new Juggernaut;
@@ -18,12 +19,14 @@ var gameEvents = (function($) {
                 case "RUNNING":
                     $("#info-box").remove();
                     $("#connection-status").show("slow");
+                    $("#letters").show();
                     handler.onRunning(game);
                     break;
                 case "CORRECT_GUESS":
+                    handler.onCorrectGuess(game);
                     break;
                 case "INCORRECT_GUESS":
-                    console.log("incorrect guess event");
+                    handler.onIncorrectGuess(game);
                     hangman.drawNextPart();
                     break;
                 case "OVER_SAVED":

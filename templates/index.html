@@ -24,3 +24,11 @@
     </p>
 </form>
 {% endblock %}
+
+{% block bottom %}
+<div id="letters">
+{% for letter in letters %}
+    <span class="letter">{{letter}}</span>
+{% endfor %}
+</div>
+{% endblock %}

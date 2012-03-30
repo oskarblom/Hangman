@@ -15,11 +15,10 @@
             $.post("/game/join/" + currentChannel);
         },
         onRunning : function (game) { 
-            $("#letters").show();
             $(".letter a").click(function(event) {
                 event.preventDefault();
                 currentLetter = $(this).html();
-                $(this).parent().html(currentLetter);
+                $(this).parent().css("visibility", "hidden");
                 $.post("/game/guess/" + currentChannel + "/" + currentLetter);
             });
         },

@@ -1,17 +1,21 @@
 (function($) {
 
+    var clearLetter = function(letter) {
+        $(".letter:contains(" + letter + ")").css("visibility", "hidden");
+    };
+
+    var getUrlByChannel = function (channel) {
+        return window.location.protocol +  "//" + 
+               window.location.host + "/join/" + channel;
+    };
+
     var eventHandler = {
         onConnect : function() { },
         onRunning : function (game) { },
-        onCorrectGuess : function (game) { },
-        onIncorrectGuess : function (game) { },
+        onCorrectGuess : function (game) { clearLetter(game.last_guess); },
+        onIncorrectGuess : function (game) { clearLetter(game.last_guess); },
         onOverSaved : function (game) { },
         onOverHung : function (game) { }
-    }
-
-    function getUrlByChannel(channel) {
-        return window.location.protocol +  "//" + 
-               window.location.host + "/join/" + channel;
     }
 
     $(document).ready(function() {
@@ -22,7 +26,7 @@
         });
 
         $("#create").submit(function(event) {
-            event.preventDefault();
+css("visibility", "hidden");
             word = $("#create-textbox").val();
 
             if(!word.match(/^[A-Za-zÅÄÖåäö]+$/)) {

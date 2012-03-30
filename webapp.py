@@ -13,6 +13,9 @@ con = Connection()
 def publish_event(game):
     Juggernaut().publish(game.channel, game.to_json())
 
+def get_letters():
+    return [letter for letter in ascii_uppercase] + [u'Å', u'Ä', u'Ö']
+
 @app.route("/testhost")
 def test_host():
     return render_template("testhost.html")
@@ -23,11 +26,12 @@ def test_guest():
 
 @app.route("/")
 def main():
-    return render_template("index.html")
+    letters = get_letters()
+    return render_template("index.html", letters=letters)
 
 @app.route("/join/<channel>")
 def join(channel):
-    letters = [letter for letter in ascii_uppercase] + [u'Å', u'Ä', u'Ö']
+    letters = get_letters()
     return render_template("join.html", channel_id=channel, letters=letters)
 
 # API routes

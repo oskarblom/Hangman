@@ -5,8 +5,8 @@
 
     function getGameChannel() {
         var url = document.URL.split("/");
-        if(uri.length > 0 && uri.length === 5) {
-            return uri[uri.length - 1];
+        if(url.length > 0 && url.length === 5) {
+            return url[url.length - 1];
         } 
     }
 

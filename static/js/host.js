@@ -10,8 +10,8 @@
     };
 
     var eventHandler = {
-        onConnect : function() { },
-        onRunning : function (game) { },
+        onConnect : function() {},
+        onRunning : function (game) { $("#readonly-container").remove(); },
         onCorrectGuess : function (game) { clearLetter(game.last_guess); },
         onIncorrectGuess : function (game) { clearLetter(game.last_guess); },
         onOverSaved : function (game) { },
@@ -43,7 +43,7 @@
                     getUrlByChannel(data.channel) + 
                     "' readonly='readonly'/><div></div></div>"
                 );
-                $("#column-right").prepend("<p>" + word.toUpperCase() + "</p>");
+                $("#column-right").prepend("<p>Ord: " + word.toUpperCase() + "</p>");
                 gameEvents.listen(data.channel, eventHandler);
                 $("#create").remove();
                 $("#info-box").html(

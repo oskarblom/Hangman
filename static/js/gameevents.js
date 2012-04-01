@@ -36,10 +36,12 @@ var gameEvents = (function($) {
                 case "OVER_SAVED":
                     $("#wordstate-container").html(game.wordstate.join(" "));
                     $("#column-right").append("<p>Gubben är räddad!</p>");
+                    handler.onOverSaved(game);
                     break;
                 case "OVER_HUNG":
                     hangman.drawNextPart();
                     $("#column-right").append("<p>Gubben dog! :( ordet var " + game.word + "</p>");
+                    handler.onOverHung(game);
                     break;
                 default:
                     break;

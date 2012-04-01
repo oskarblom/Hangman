@@ -3,11 +3,20 @@
     var currentChannel;
     var currentLetter;
 
-    function getGameChannel() {
+    var getGameChannel = function() {
         var url = document.URL.split("/");
         if(url.length > 0 && url.length === 5) {
             return url[url.length - 1];
         } 
+    }
+
+    var clearLinks = function() {
+        console.log("clear links");
+        $(".letter").each(function() {
+            var letter = $(this).find("a").html();
+            console.log(letter);
+            $(this).html(letter);
+        });
     }
 
     var eventHandler = {
@@ -24,8 +33,12 @@
         },
         onCorrectGuess : function (game) { },
         onIncorrectGuess : function (game) { },
-        onOverSaved : function (game) { },
-        onOverHung : function (game) { }
+        onOverSaved : function (game) { 
+           clearLinks(); 
+        },
+        onOverHung : function (game) {
+           clearLinks(); 
+        }
     }
 
     $(document).ready(function() {

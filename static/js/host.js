@@ -37,7 +37,7 @@
                 return;
             } else if (word.length > 12) {
                 var validationContainer = $("#validation-message");
-                validationContainer.html("Order får bestå av max 12 tecken");
+                validationContainer.html("Ordet får bestå av max 12 tecken");
                 validationContainer.show();
                 return;
             } 

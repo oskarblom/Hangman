@@ -35,11 +35,16 @@
                 validationContainer.html("Ordet får bara bestå av bokstäver");
                 validationContainer.show();
                 return;
+            } else if (word.length > 12) {
+                var validationContainer = $("#validation-message");
+                validationContainer.html("Order får bestå av max 12 tecken");
+                validationContainer.show();
+                return;
             } 
             
             $.post("/game/create/" + word, function(data) {
                 $("#column-right").html(
-                    "<div id='readonly-container'><input type='text' value='" +
+                    "<div id='readonly-container'><p>Kopiera länken i rutan nedan och skicka den till din kompis.</p><input type='text' value='" +
                     getUrlByChannel(data.channel) + 
                     "' readonly='readonly'/><div></div></div>"
                 );

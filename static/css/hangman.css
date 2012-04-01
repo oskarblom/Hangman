@@ -1,15 +1,14 @@
 h3 {
-    font-family: "Helvetica Neue", Arial, Sans-serif;
     color: #4c4c4c;
 }
 
 p, span {
-    font-family: "Helvetica Neue", Arial, Sans-serif;
     color: #666666;
     font-size: 18px;
 }
 
 body {
+    font-family: "Helvetica Neue", Arial, Sans-serif;
     padding-top: 40px;
     background-color: #b7dafc;
 }
@@ -191,4 +190,10 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
+}
+
+#wordstate-container {
+    color: #08BA1E;
+    font-size: 36px;
+    letter-spacing: 4px;
 }

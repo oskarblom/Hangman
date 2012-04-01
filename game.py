@@ -14,7 +14,7 @@ class GameState(object):
 class AlreadyGuessedException(Exception):
     pass
 
-MAX_INCORRECT_GUESSES = 10
+MAX_INCORRECT_GUESSES = 11
 
 class HangmanGame(Document):
     __collection__ = "games"

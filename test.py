@@ -46,7 +46,7 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game.wordstate, guesses)
 
     def test_hang_sets_state(self):
-        [self.game.guess(x) for x in ["C", "D", "E", "G", "H", "I", "J", "K", "L", "M"]]
+        [self.game.guess(x) for x in ["C", "D", "E", "G", "H", "I", "J", "K", "L", "M", "N", "P"]]
         self.assertEqual(self.game.state, GameState.OVER_HUNG)
 
     def test_join_sets_state(self):

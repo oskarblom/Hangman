@@ -27,20 +27,21 @@
 
         $("#create").submit(function(event) {
             event.preventDefault();
-            console.log("clicked");
-            word = $("#create-textbox").val();
 
-            if(!word.match(/^[A-Za-zÅÄÖåäö]+$/)) {
-                var validationContainer = $("#validation-message");
-                validationContainer.html("Ordet får bara bestå av bokstäver");
-                validationContainer.show();
-                return;
+            var word = $("#create-textbox").val();
+
+            var validationMessage = "";
+
+            if (!word.match(/^[A-Za-zÅÄÖåäö]+$/)) {
+                validationMessage = "Ordet får bara bestå av bokstäver";
             } else if (word.length > 12) {
-                var validationContainer = $("#validation-message");
-                validationContainer.html("Ordet får bestå av max 12 tecken");
-                validationContainer.show();
-                return;
+                validationMessage = "Ordet får bestå av max 12 tecken";
             } 
+
+            if (validationMessage !== "") {
+                $("#validation-message").html("Ordet får bestå av max 12 tecken").show();
+                return;
+            }
             
             $.post("/game/create/" + word, function(data) {
                 $("#column-right").html(

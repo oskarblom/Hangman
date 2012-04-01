@@ -13,23 +13,28 @@ var gameEvents = (function($) {
 
         jug.subscribe(channel, function(data) {
             console.log("got event", data);
-            game = JSON.parse(data);
-
+            var game = JSON.parse(data);
+            var wordstateContainer = $("<div id='wordstate-container'></div>");
             switch (game.state) {
                 case "RUNNING":
                     $("#info-box").remove();
                     $("#connection-status").show("slow");
                     $("#letters").show();
+                    wordstateContainer.html(game.wordstate.join(" "))
+                    $("#column-right").append(wordstateContainer);
                     handler.onRunning(game);
                     break;
                 case "CORRECT_GUESS":
+                    $("#wordstate-container").html(game.wordstate.join(" "));
                     handler.onCorrectGuess(game);
                     break;
                 case "INCORRECT_GUESS":
+                    $("#wordstate-container").html(game.wordstate.join(" "));
                     handler.onIncorrectGuess(game);
                     hangman.drawNextPart();
                     break;
                 case "OVER_SAVED":
+
                     break;
                 case "OVER_HUNG":
                     break;
@@ -40,4 +45,3 @@ var gameEvents = (function($) {
     };
     return { "listen" : subscribe }
 })(jQuery);
-

@@ -39,7 +39,7 @@
             } 
 
             if (validationMessage !== "") {
-                $("#validation-message").html("Ordet får bestå av max 12 tecken").show();
+                $("#validation-message").html(validationMessage).show();
                 return;
             }
             

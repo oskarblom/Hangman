@@ -67,4 +67,4 @@ if __name__ == "__main__":
     con.hangman.drop_collection("games")
     con.register([HangmanGame])
     debug = True
-    app.run(debug=debug)
+    app.run(host="0.0.0.0", debug=debug)

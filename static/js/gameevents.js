@@ -12,7 +12,6 @@ var gameEvents = (function($) {
         }
 
         jug.subscribe(channel, function(data) {
-            console.log("got event", data);
             var game = JSON.parse(data);
             var wordstateContainer = $("<div id='wordstate-container'></div>");
             switch (game.state) {

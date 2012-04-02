@@ -11,10 +11,8 @@
     }
 
     var clearLinks = function() {
-        console.log("clear links");
         $(".letter").each(function() {
             var letter = $(this).find("a").html();
-            console.log(letter);
             $(this).html(letter);
         });
     }

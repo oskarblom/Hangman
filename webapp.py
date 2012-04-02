@@ -4,6 +4,7 @@ from string import ascii_uppercase
 from juggernaut import Juggernaut
 from game import *
 from mongokit import Connection
+from urllib import unquote
 
 app = Flask(__name__)
 
@@ -43,7 +44,7 @@ def test_game():
 @app.route("/game/create/<word>", methods=["POST"])
 def create_game(word):
     game = con.HangmanGame()
-    game.create(word)
+    game.create(unquote(word))
     game.save()
     return jsonify({"channel": game.channel})
 
@@ -58,7 +59,7 @@ def join_game(channel):
 @app.route("/game/guess/<channel>/<letter>", methods=["POST"])
 def guess(channel, letter):
     game = con.HangmanGame.find_one({"channel": unicode(channel)})
-    game.guess(letter)
+    game.guess(unquote(letter))
     game.save()
     publish_event(game)
     return ""

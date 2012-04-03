@@ -43,7 +43,7 @@
                 return;
             }
             
-            $.post("/game/create/" + escape(word), function(data) {
+            $.post("/game/create/" + encodeURI(word.toUpperCase()), function(data) {
                 $("#column-right").html(
                     "<div id='readonly-container'><p>Kopiera länken i rutan nedan och skicka den till din kompis.</p><input type='text' value='" +
                     getUrlByChannel(data.channel) + 

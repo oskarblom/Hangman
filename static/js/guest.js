@@ -26,7 +26,7 @@
                 event.preventDefault();
                 currentLetter = $(this).html();
                 $(this).parent().css("visibility", "hidden");
-                $.post("/game/guess/" + currentChannel + "/" + escape(currentLetter));
+                $.post("/game/guess/" + currentChannel + "/" + encodeURI(currentLetter));
             });
         },
         onCorrectGuess : function (game) { },

@@ -44,7 +44,7 @@ def test_game():
 @app.route("/game/create/<word>", methods=["POST"])
 def create_game(word):
     game = con.HangmanGame()
-    game.create(unquote(word))
+    game.create(word)
     game.save()
     return jsonify({"channel": game.channel})
 
